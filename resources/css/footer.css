@@ -1,0 +1,28 @@
+#footer {
+    background: #000;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 13px;
+}
+
+.btn-popup {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    z-index: 99;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    background: var(--c-akcent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    svg {
+        width: 30px;
+        heiht: 30px;
+        fill: #fff;
+    }
+}
