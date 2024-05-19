@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="69a4d29f-1b27-4662-80bf-47bf3f968e11" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/public/themes/master/404.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/themes/master/footer.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/themes/master/front-page.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/themes/master/functions.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/themes/master/header.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/themes/master/img/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/themes/master/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/themes/master/page.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/themes/master/screenshot.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/themes/master/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/css/footer.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/css/header.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/css/home.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/css/page.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tailwind.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/resources/css/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerConfigs">
+    <option name="configs">
+      <option value="$PROJECT_DIR$/public/mu-plugins/headache/composer.json" />
+      <option value="$PROJECT_DIR$/public/wordpress/wp-includes/sodium_compat/composer.json" />
+    </option>
+  </component>
+  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="/opt/homebrew/Cellar/php@7.2/7.2.34_9/bin/php">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/vendor/phpoption/phpoption" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/vendor/graham-campbell/result-type" />
+      <path value="$PROJECT_DIR$/vendor/vlucas/phpdotenv" />
+      <path value="$PROJECT_DIR$/vendor/roots/wp-password-bcrypt" />
+      <path value="$PROJECT_DIR$/vendor/roots/wordpress-core-installer" />
+      <path value="$PROJECT_DIR$/vendor/roots/bedrock-autoloader" />
+      <path value="$PROJECT_DIR$/vendor/ramsey/collection" />
+      <path value="$PROJECT_DIR$/vendor/brick/math" />
+      <path value="$PROJECT_DIR$/vendor/ramsey/uuid" />
+      <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php83" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+    </include_path>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2fEX0liCXppCsc4XDkIE7L05PPz" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="openDirectoriesWithSingleClick" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/serhi/Sites/master5.kiev.ua/resources/static&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/static" />
+      <recent name="$PROJECT_DIR$/public/themes" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/themes/master/img" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-PS-241.14494.237" />
+        <option value="bundled-php-predefined-ba97393d7c68-8f0632a2a215-com.jetbrains.php.sharedIndexes-PS-241.14494.237" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="69a4d29f-1b27-4662-80bf-47bf3f968e11" name="Changes" comment="" />
+      <created>1713366989573</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1713366989573</updated>
+      <workItem from="1713366991028" duration="1644000" />
+      <workItem from="1713372633620" duration="229000" />
+      <workItem from="1713459025884" duration="3271000" />
+      <workItem from="1713530863836" duration="9963000" />
+      <workItem from="1713541417624" duration="8882000" />
+      <workItem from="1713604373121" duration="6647000" />
+      <workItem from="1714413123448" duration="2542000" />
+      <workItem from="1714662508803" duration="6282000" />
+      <workItem from="1715242388998" duration="5780000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
