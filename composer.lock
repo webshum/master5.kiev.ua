@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e0caf34107779f9718cda84e86443b8c",
+    "content-hash": "37204b8f7e72976ea026cf8c916f071f",
     "packages": [
         {
             "name": "brick/math",
@@ -863,16 +863,16 @@
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v7.0.6",
+            "version": "v7.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "8789625dcf36e5fbf753014678a1e090f1bc759c"
+                "reference": "f9c54a6b1697d0b3b3d541e89e7843cdb3c9bfb7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/8789625dcf36e5fbf753014678a1e090f1bc759c",
-                "reference": "8789625dcf36e5fbf753014678a1e090f1bc759c",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/f9c54a6b1697d0b3b3d541e89e7843cdb3c9bfb7",
+                "reference": "f9c54a6b1697d0b3b3d541e89e7843cdb3c9bfb7",
                 "shasum": ""
             },
             "require": {
@@ -920,7 +920,7 @@
             "description": "Defines an object-oriented layer for the HTTP specification",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/http-foundation/tree/v7.0.6"
+                "source": "https://github.com/symfony/http-foundation/tree/v7.1.0"
             },
             "funding": [
                 {
@@ -936,7 +936,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-03-19T11:46:48+00:00"
+            "time": "2024-05-20T16:41:11+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
