@@ -9,11 +9,25 @@ add_action('after_setup_theme', function () {
 
     add_theme_support('post-thumbnails');
     add_theme_support('title-tag');
+    add_theme_support('comments');
 
     register_nav_menus([
         'navigation' => __('Navigation'),
     ]);
 });
+
+// Polylang
+pll_register_string( 'search', 'Search', 'WordPress' );
+pll_register_string( 'slogan', 'Slogan', 'WordPress' );
+
+// Open comments
+add_filter( 'comments_open', function($open, $post_id) {
+    $post = get_post($post_id);
+    if ($post->post_type == 'post' || $post->post_type == 'page') {
+        return true;
+    }
+    return $open;
+}, 10, 2 );
 
 // Register scripts and styles.
 add_action('wp_enqueue_scripts', function () {

@@ -13,57 +13,60 @@
 
     <div class="wrapper">
         <header id="header">
-            <div class="center flex justify-between items-end">
+            <div class="center flex justify-between items-center">
                 <div>
                     <a href="/" class="logo">
                         <img src="<?php echo bloginfo('template_url'); ?>/img/logo.png" alt="">
                     </a>
 
                     <div class="slogan">
-                        <h4>Отличный <span>"Домашний мастер"</span></h4>
-                        <p>Заказать мастера на ремонт бойлера в Киеве у нас это просто!</p>
+                        <?php pll_e('Slogan') ?>
                     </div>
                 </div>
 
-                <div class="flex flex-col">
-                    <form action="#" class="form-search">
-                        <input type="text" name="s" placeholder="Пошук...">
-                        <button type="submit">
-                            <svg><use xlink:href="#search"></use></svg>
-                        </button>
-                    </form>
+                <form action="/" class="form-search">
+                    <input type="text" name="s" placeholder="<?php pll_e('Search') ?>...">
+                    <button type="submit">
+                        <svg><use xlink:href="#search"></use></svg>
+                    </button>
+                </form>
+            </div>
 
-                    <div class="flex items-center">
-                        <nav class="nav" role="navigation">
-                            <?php
-                            wp_nav_menu([
-                                'theme_location' => 'navigation',
-                                'container' => '',
-                            ]);
-                            ?>
-                        </nav>
+            <div class="center flex justify-between items-center !mt-[10px]">
+                <button class="btn-nav hidden">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
 
-                        <address>
-                            <?php if (!empty(get_fields('options')['phone'])) : ?>
-                                <a href="tel:<?= get_fields('options')['phone'] ?>">
-                                    <svg><use xlink:href="#phone"></use></svg>
-                                    <span><?= get_fields('options')['phone'] ?></span>
-                                </a>
-                            <?php endif; ?>
+                <nav class="nav" role="navigation">
+                    <?php
+                    wp_nav_menu([
+                        'theme_location' => 'navigation',
+                        'container' => '',
+                    ]);
+                    ?>
+                </nav>
 
-                            <?php if (!empty(get_fields('options')['telegram'])) : ?>
-                                <a href="https://t.me/<?= get_fields('options')['telegram'] ?>">
-                                    <svg><use xlink:href="#telegram"></use></svg>
-                                </a>
-                            <?php endif; ?>
+                <address>
+                    <?php if (!empty(get_fields('options')['phone'])) : ?>
+                        <a href="tel:<?= get_fields('options')['phone'] ?>">
+                            <svg><use xlink:href="#phone"></use></svg>
+                            <span><?= get_fields('options')['phone'] ?></span>
+                        </a>
+                    <?php endif; ?>
 
-                            <?php if (!empty(get_fields('options')['telegram'])) : ?>
-                                <a href="viber://chat?number=<?= get_fields('options')['viber'] ?>">
-                                    <svg><use xlink:href="#viber"></use></svg>
-                                </a>
-                            <?php endif; ?>
-                        </address>
-                    </div>
-                </div>
+                    <?php if (!empty(get_fields('options')['telegram'])) : ?>
+                        <a href="https://t.me/<?= get_fields('options')['telegram'] ?>">
+                            <svg><use xlink:href="#telegram"></use></svg>
+                        </a>
+                    <?php endif; ?>
+
+                    <?php if (!empty(get_fields('options')['telegram'])) : ?>
+                        <a href="viber://chat?number=<?= get_fields('options')['viber'] ?>">
+                            <svg><use xlink:href="#viber"></use></svg>
+                        </a>
+                    <?php endif; ?>
+                </address>
             </div>
         </header>

@@ -64,3 +64,23 @@
         }
     }
 }
+
+@media (max-width: 991px) {
+    .services .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .reviews .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 500px) {
+    .services .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .reviews .grid {
+        grid-template-columns: 1fr;
+    }
+}

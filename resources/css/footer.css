@@ -6,7 +6,13 @@
     font-size: 13px;
 }
 
-.btn-popup {
+@keyframes shadow-pulse {
+    0% {box-shadow: 0 0 0 0 rgba(0, 0, 0, .8)}
+    50% {box-shadow: 0 0 0 0 rgba(0, 0, 0, .2)}
+    100% {box-shadow: 0 0 0 20px transparent}
+}
+
+.btn-social {
     position: fixed;
     right: 30px;
     bottom: 30px;
@@ -19,10 +25,42 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    animation: shadow-pulse 3s infinite;
 
     svg {
         width: 30px;
         height: 30px;
         fill: #fff;
+    }
+
+    .inner {
+        border: 1px solid red;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 15px;
+        border: 1px solid var(--c-akcent);
+        padding: 20px;
+        position: absolute;
+        left: 100%;
+        bottom: 100%;
+        z-index: 10;
+        background: #fff;
+        opacity: 0;
+        gap: 10px;
+        margin-bottom: 10px;
+        transition: all 0.3s;
+
+        svg {
+            fill: var(--c-akcent);
+            transition: all 0.3s;
+            &:hover {fill: #000;}
+        }
+    }
+
+    &.active .inner {
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 1;
     }
 }

@@ -63,7 +63,57 @@
     }
 }
 
+.product-blok {
+    background: #ceeae1;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(0,0,0,.1);
+    padding: 20px;
+
+    .product-block {
+        background: none;
+        border-radius: 0;
+        box-shadow: none;
+        padding: 0;
+    }
+
+    .cell {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        height: auto !important;
+    }
+}
+
 .testim-blok-inner {
     display: flex;
     flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+@media (max-width: 768px) {
+    .main-page {
+        h1 {font-size: 25px;}
+    }
+
+    .product-block {
+        grid-template-columns: 1fr;
+
+        .product {
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
+    .product-blok {
+        .product-blok-inner > p {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .cell {
+            display: flex;
+            flex-direction: column;
+            & + .cell {margin-top: 20px;}
+        }
+    }
 }
