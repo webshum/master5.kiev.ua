@@ -22,7 +22,7 @@ jobs:
                   password: Serhi199029
                   script: |
                       cd /home/webshum/web-shum.com.ua/kiev
-                      git pull origin master
+                      git pull origin develop
 
             - name: Deploy to production
               if: github.ref == 'refs/heads/master'
