@@ -1,7 +1,7 @@
 import '../css/index.css';
 
 document.querySelectorAll('[data-lazy-src]').forEach(img => {
-   img.src = img.dataset.lazySrc;
+    img.src = img.dataset.lazySrc;
 });
 
 document.querySelector('.btn-top').onclick = e => {

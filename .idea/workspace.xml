@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="69a4d29f-1b27-4662-80bf-47bf3f968e11" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/wordplate.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/wordplate.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/themes/master/assets/.vite/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/themes/master/assets/.vite/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/themes/master/assets/index-rmGnvvvm.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -109,7 +110,7 @@
       <workItem from="1714662508803" duration="6282000" />
       <workItem from="1715242388998" duration="5780000" />
       <workItem from="1716205666379" duration="15000" />
-      <workItem from="1717401131021" duration="18188000" />
+      <workItem from="1717401131021" duration="18394000" />
     </task>
     <servers />
   </component>
