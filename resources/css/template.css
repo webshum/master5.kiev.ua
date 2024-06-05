@@ -194,5 +194,8 @@
         .item {max-width: 250px;}
     }
 
-    .type-template img {max-width: 150px;}
+    .type-template {
+        justify-content: center;
+        img {max-width: 150px;}
+    }
 }
