@@ -19,6 +19,17 @@ add_action('after_setup_theme', function () {
 // Polylang
 pll_register_string( 'search', 'Search', 'WordPress' );
 pll_register_string( 'slogan', 'Slogan', 'WordPress' );
+pll_register_string( 'comment', 'Comment', 'WordPress' );
+pll_register_string( 'login', 'You must be logged in to post a comment.', 'WordPress' );
+pll_register_string( 'logout', 'Logged in as. Log out?', 'WordPress' );
+pll_register_string( 'comment-notes', 'Required fields are marked *', 'WordPress' );
+pll_register_string( 'reply', 'Leave a Reply', 'WordPress' );
+pll_register_string( 'reply-to', 'Leave a Reply to', 'WordPress' );
+pll_register_string( 'reply-cancel', 'Cancel Reply', 'WordPress' );
+pll_register_string( 'post-comment', 'Post Comment', 'WordPress' );
+pll_register_string( 'name', 'Name', 'WordPress' );
+pll_register_string( 'email', 'Email', 'WordPress' );
+pll_register_string( 'website', 'Website', 'WordPress' );
 
 // Open comments
 add_filter( 'comments_open', function($open, $post_id) {

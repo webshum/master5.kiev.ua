@@ -32,7 +32,7 @@
                 </form>
             </div>
 
-            <div class="center flex justify-between items-center !mt-[10px]">
+            <div class="center flex justify-between items-center !mt-[5px]">
                 <button class="btn-nav hidden">
                     <span></span>
                     <span></span>
@@ -65,6 +65,18 @@
                     <?php if (!empty(get_fields('options')['telegram'])) : ?>
                         <a href="viber://chat?number=<?= get_fields('options')['viber'] ?>">
                             <svg><use xlink:href="#viber"></use></svg>
+                        </a>
+                    <?php endif; ?>
+
+                    <?php if (!empty(get_fields('options')['instagram'])) : ?>
+                        <a href="<?= get_fields('options')['instagram'] ?>" target="_blank">
+                            <svg><use xlink:href="#instagram"></use></svg>
+                        </a>
+                    <?php endif; ?>
+
+                    <?php if (!empty(get_fields('options')['facebook'])) : ?>
+                        <a href="<?= get_fields('options')['facebook'] ?>" target="_blank">
+                            <svg><use xlink:href="#facebook"></use></svg>
                         </a>
                     <?php endif; ?>
                 </address>

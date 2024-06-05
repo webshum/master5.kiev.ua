@@ -45,7 +45,7 @@
 }
 
 .slogan {
-    h4 {
+    div {
         font-weight: 600;
         font-size: 12px;
         text-transform: uppercase;
