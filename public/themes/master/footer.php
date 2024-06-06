@@ -13,19 +13,19 @@
 <div class="btn-social">
     <div class="inner">
         <?php if (!empty(get_fields('options')['phone'])) : ?>
-            <a href="tel:<?= get_fields('options')['phone'] ?>">
+            <a href="tel:<?= get_fields('options')['phone'] ?>" target="_blank">
                 <svg><use xlink:href="#phone"></use></svg>
             </a>
         <?php endif; ?>
 
         <?php if (!empty(get_fields('options')['telegram'])) : ?>
-            <a href="https://t.me/<?= get_fields('options')['telegram'] ?>">
+            <a href="https://t.me/<?= get_fields('options')['telegram'] ?>" target="_blank">
                 <svg><use xlink:href="#telegram"></use></svg>
             </a>
         <?php endif; ?>
 
         <?php if (!empty(get_fields('options')['telegram'])) : ?>
-            <a href="viber://chat?number=<?= get_fields('options')['viber'] ?>">
+            <a href="viber://chat?number=<?= get_fields('options')['viber'] ?>" target="_blank">
                 <svg><use xlink:href="#viber"></use></svg>
             </a>
         <?php endif; ?>

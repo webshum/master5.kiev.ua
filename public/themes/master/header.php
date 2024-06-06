@@ -24,6 +24,10 @@
                     </div>
                 </div>
 
+                <?php if (!empty(get_fields('options')['work_time'])) : ?>
+                    <div class="work-time"><?= get_fields('options')['work_time'] ?></div>
+                <?php endif; ?>
+
                 <form action="/" class="form-search">
                     <input type="text" name="s" placeholder="<?php pll_e('Search') ?>...">
                     <button type="submit">
@@ -50,20 +54,20 @@
 
                 <address>
                     <?php if (!empty(get_fields('options')['phone'])) : ?>
-                        <a href="tel:<?= get_fields('options')['phone'] ?>">
+                        <a href="tel:<?= get_fields('options')['phone'] ?>" target="_blank">
                             <svg><use xlink:href="#phone"></use></svg>
                             <span><?= get_fields('options')['phone'] ?></span>
                         </a>
                     <?php endif; ?>
 
                     <?php if (!empty(get_fields('options')['telegram'])) : ?>
-                        <a href="https://t.me/<?= get_fields('options')['telegram'] ?>">
+                        <a href="https://t.me/<?= get_fields('options')['telegram'] ?>" target="_blank">
                             <svg><use xlink:href="#telegram"></use></svg>
                         </a>
                     <?php endif; ?>
 
                     <?php if (!empty(get_fields('options')['telegram'])) : ?>
-                        <a href="viber://chat?number=<?= get_fields('options')['viber'] ?>">
+                        <a href="viber://chat?number=<?= get_fields('options')['viber'] ?>" target="_blank">
                             <svg><use xlink:href="#viber"></use></svg>
                         </a>
                     <?php endif; ?>
