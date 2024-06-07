@@ -1,10 +1,17 @@
 #header {
     padding: 20px 0 10px 0;
     border-bottom: 1px solid #ededed;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background: #fff;
 
     .center {
         padding-left: 0;
         padding-right: 0;
+        position: relative;
 
         @media (max-width: 1500px) {
             padding-left: 15px;
@@ -42,6 +49,14 @@
         width: 150px;
         margin-top: -10px;
     }
+}
+
+.work-time {
+    position: absolute;
+    top: -12px;
+    right: 0;
+    font-size: 11px;
+    color: #888;
 }
 
 .slogan {
@@ -121,6 +136,10 @@
     }
 }
 
+@media (max-width: 1500px) {
+    .work-time {right: 15px;}
+}
+
 @media (max-width: 991px) {
     .btn-nav {
         display: inline-block;
@@ -197,6 +216,11 @@
     #header {
         .logo {margin-left: -25px;}
         .slogan {display: none;}
+    }
+
+    .work-time {
+        top: -16px;
+        font-size: 10px;
     }
 
     .form-search {margin-bottom: 0;}

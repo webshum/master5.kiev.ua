@@ -14,8 +14,7 @@ document.querySelector('.btn-top').onclick = e => {
 }
 
 document.querySelector('.btn-social').addEventListener('click', e => {
-    e.preventDefault();
-    document.querySelector('.btn-social').classList.toggle('active');
+    document.querySelector('.btn-social').classList.add('active');
 });
 
 document.querySelector('.btn-nav').addEventListener('click', e => {

@@ -39,7 +39,7 @@
         <svg width="24" height="24"><use xlink:href="#close"></use></svg>
     </a>
 
-    <div class="body"><?= do_shortcode('[contact-form-7 id="b27faf2" title="Заказать звонок футер"]'); ?></div>
+    <div class="body"><?= do_shortcode('[contact-form-7 id="ffd2730" title="Обратный звонок кнопка в заголовке"]'); ?></div>
 </div>
 
 <svg class="hidden">
