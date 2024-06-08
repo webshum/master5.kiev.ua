@@ -14,7 +14,13 @@ document.querySelector('.btn-top').onclick = e => {
 }
 
 document.querySelector('.btn-social').addEventListener('click', e => {
-    document.querySelector('.btn-social').classList.add('active');
+    if (e.target.closest('.btn-social').classList.contains('active')) {
+        console.log('true');
+        document.querySelector('.btn-social').classList.remove('active');
+    } else {
+        console.log('false');
+        document.querySelector('.btn-social').classList.add('active');
+    }
 });
 
 document.querySelector('.btn-nav').addEventListener('click', e => {

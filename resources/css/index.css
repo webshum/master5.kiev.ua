@@ -18,6 +18,7 @@ body {
     font-size: 14px;
     color: #2f2f2f;
     font-family: Verdana, sans-serif;
+    user-select: none;
 }
 
 hr {
@@ -189,6 +190,7 @@ input[type="submit"] {
     display: flex;
     align-items: center;
     justify-content: center;
+    background: #fff;
 
     svg {
         fill: none;

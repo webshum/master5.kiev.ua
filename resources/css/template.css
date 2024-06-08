@@ -196,6 +196,6 @@
 
     .type-template {
         justify-content: center;
-        img {max-width: 150px;}
+        img {max-width: 64px;}
     }
 }
