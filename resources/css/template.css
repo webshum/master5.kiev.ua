@@ -84,7 +84,8 @@
         img {
             display: block;
             border-radius: 10px;
-            margin: 20px 15px;
+            margin: 20px auto;
+            width: 90%;
         }
 
         & > div {
