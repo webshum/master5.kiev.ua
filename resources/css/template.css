@@ -124,6 +124,7 @@
             object-fit: cover;
             border-radius: 50%;
             border: 3px solid var(--c-akcent);
+            margin: 0 auto 20px;
         }
     }
 }
