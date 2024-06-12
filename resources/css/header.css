@@ -146,7 +146,7 @@
     .work-time {right: 15px;}
 }
 
-@media (max-width: 991px) {
+@media (max-width: 1200px) {
     .btn-nav {
         display: inline-block;
         width: 30px;
