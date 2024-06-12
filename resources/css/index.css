@@ -6,6 +6,7 @@
 @import "home";
 @import "page";
 @import "comment";
+@import "blog";
 @import "template";
 
 * {outline: none;}

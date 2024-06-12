@@ -43,7 +43,7 @@ if ( post_password_required() ) {
         'url' =>
             '<p class="comment-form-url"><label for="url">' . pll__('Website') . '</label>' .
             '<input id="url" name="url" type="text" value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30" /></p>',
-    ];
+   ];
 
     $args = [
         'fields' => apply_filters( 'comment_form_default_fields', $fields ),

@@ -39,6 +39,8 @@
     }
 }
 
+.comment-form-cookies-consent {display: none !important;}
+
 .comment-respond {
     .comment-reply-title {text-align: center;}
 }

@@ -30,6 +30,9 @@ pll_register_string( 'post-comment', 'Post Comment', 'WordPress' );
 pll_register_string( 'name', 'Name', 'WordPress' );
 pll_register_string( 'email', 'Email', 'WordPress' );
 pll_register_string( 'website', 'Website', 'WordPress' );
+pll_register_string( 'more', 'More', 'WordPress' );
+pll_register_string( 'fresh-posts', 'Fresh posts', 'WordPress' );
+pll_register_string( 'fresh-comments', 'Fresh comments', 'WordPress' );
 
 // Open comments
 add_filter( 'comments_open', function($open, $post_id) {

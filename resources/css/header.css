@@ -92,6 +92,12 @@
             margin-left: 9px;
         }
         & > li:last-child:after {display: none;}
+
+        li.current-lang a,
+        li.current-menu-item a {
+            color: var(--c-akcent);
+            font-weight: bold;
+        }
     }
 
     a {
