@@ -164,6 +164,10 @@
         width: 200px;
         height: 200px;
     }
+    .services-template .item img {
+        max-width: 200px;
+        max-height: 200px;
+    }
 }
 
 @media (max-width: 768px) {
