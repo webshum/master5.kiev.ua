@@ -64,6 +64,8 @@
         border-radius: 15px;
         text-align: center;
         overflow: hidden;
+        display: flex;
+        flex-direction: column;
 
         h3 {
             margin: 0;
@@ -76,16 +78,18 @@
 
         a {
             display: inline-block;
-            padding: 20px 15px;
             overflow: hidden;
-            img {
-                display: block;
-                border-radius: 10px;
-            }
+        }
+
+        img {
+            display: block;
+            border-radius: 10px;
+            margin: 20px 15px;
         }
 
         & > div {
             padding: 15px 15px 20px 15px;
+            margin-top: auto;
         }
     }
 }
