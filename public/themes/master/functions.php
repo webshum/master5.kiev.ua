@@ -178,3 +178,10 @@ function add_cpt_to_pll( $post_types, $is_settings ) {
     }
     return $post_types;
 }
+
+function custom_comment_reply_title($args) {
+    $args['title_reply_before'] = '<div id="reply-title" class="custom-reply-title">';
+    $args['title_reply_after'] = '</div>';
+    return $args;
+}
+add_filter('comment_form_defaults', 'custom_comment_reply_title');
