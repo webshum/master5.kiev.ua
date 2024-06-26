@@ -12,6 +12,8 @@ $content = get_field('content');
 
 <main class="home-page">
     <div class="center">
+        <h1><?php the_title(); ?></h1>
+
         <?php if (!empty($home)) : ?>
             <div class="home">
                 <?= $home ?>
