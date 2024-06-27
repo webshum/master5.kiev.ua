@@ -1,3 +1,4 @@
+.custom-reply-title {display: none;}
 .comment-list {
     & > .comment {
         padding: 20px;

@@ -90,6 +90,23 @@
     margin: 20px 0;
 }
 
+.page-search {
+    a + a {margin-top: 30px;}
+
+    .thumb {
+        width: 200px;
+        min-width: 200px;
+        height: 200px;
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+}
+
 @media (max-width: 768px) {
     .main-page {
         h1 {font-size: 25px;}
