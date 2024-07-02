@@ -43,19 +43,6 @@ add_filter( 'comments_open', function($open, $post_id) {
     return $open;
 }, 10, 2 );
 
-add_action( 'wp_head', function() {
-    if(is_user_logged_in()) {
-        echo '
-        <style type="text/css">
-        body {margin-top: -32px;padding-bottom: 32px;}
-        body.admin-bar #wphead {padding-top: 0;}
-        body.admin-bar #footer {padding-bottom: 28px;}
-        #wpadminbar { top: auto !important;bottom: 0;}
-        #wpadminbar .quicklinks .menupop ul { bottom: 28px;}
-        </style>';
-    }
-} );
-
 // Register scripts and styles.
 add_action('wp_enqueue_scripts', function () {
     $manifestPath = get_theme_file_path('assets/.vite/manifest.json');
@@ -81,43 +68,6 @@ add_filter('script_loader_tag', function (string $tag, string $handle, string $s
 
     return $tag;
 }, 10, 3);
-
-// Remove admin menu items.
-/*add_action('admin_init', function () {
-    // remove_menu_page('edit-comments.php'); // Comments
-    // remove_menu_page('edit.php?post_type=page'); // Pages
-    // remove_menu_page('edit.php'); // Posts
-    remove_menu_page('index.php'); // Dashboard
-    // remove_menu_page('upload.php'); // Media
-});*/
-
-// Remove admin toolbar menu items.
-/*add_action('admin_bar_menu', function (WP_Admin_Bar $menu) {
-    $menu->remove_node('archive'); // Archive
-    $menu->remove_node('comments'); // Comments
-    $menu->remove_node('customize'); // Customize
-    $menu->remove_node('dashboard'); // Dashboard
-    $menu->remove_node('edit'); // Edit
-    $menu->remove_node('menus'); // Menus
-    $menu->remove_node('new-content'); // New Content
-    $menu->remove_node('search'); // Search
-    $menu->remove_node('site-name'); // Site Name
-    $menu->remove_node('themes'); // Themes
-    $menu->remove_node('updates'); // Updates
-    $menu->remove_node('view-site'); // Visit Site
-    $menu->remove_node('view'); // View
-    $menu->remove_node('widgets'); // Widgets
-    $menu->remove_node('wp-logo'); // WordPress Logo
-}, 999);*/
-
-// Remove admin dashboard widgets.
-/*add_action('wp_dashboard_setup', function () {
-    remove_meta_box('dashboard_activity', 'dashboard', 'normal'); // Activity
-    remove_meta_box('dashboard_right_now', 'dashboard', 'normal'); // At a Glance
-    remove_meta_box('dashboard_site_health', 'dashboard', 'normal'); // Site Health Status
-    remove_meta_box('dashboard_primary', 'dashboard', 'side'); // WordPress Events and News
-    remove_meta_box('dashboard_quick_press', 'dashboard', 'side'); // Quick Draft
-});*/
 
 // Add custom login form logo.
 add_action('login_head', function () {
@@ -198,3 +148,13 @@ function custom_comment_reply_title($args) {
     return $args;
 }
 add_filter('comment_form_defaults', 'custom_comment_reply_title');
+
+add_filter( 'show_admin_bar', 'custom_show_admin_bar' );
+
+function custom_show_admin_bar( $show ) {
+    if ( is_user_logged_in() ) {
+        return true;
+    } else {
+        return false;
+    }
+}
