@@ -1,6 +1,4 @@
 .reviews-template {
-    display: flex;
-    align-items: center;
     gap: 30px;
     margin: 30px 0;
 
@@ -9,6 +7,8 @@
         padding: 15px;
         border-radius: 20px;
         min-width: 300px;
+        float: left;
+        margin: 0 30px 30px 0;
 
         img {
             border-radius: 10px;
@@ -168,7 +168,10 @@
 
 @media (max-width: 768px) {
     .reviews-template {
-        flex-direction: column;
+        .image {
+            float: none;
+            margin: 0 auto 30px auto;
+        }
 
         .content {
             width: 100%;
