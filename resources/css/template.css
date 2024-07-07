@@ -171,6 +171,7 @@
         .image {
             float: none;
             margin: 0 auto 30px auto;
+            max-width: 300px;
         }
 
         .content {
