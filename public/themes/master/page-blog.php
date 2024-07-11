@@ -22,10 +22,20 @@ get_header();
                     while ($query->have_posts()) :
                         $query->the_post();
                         ?>
-                        <article>
-                            <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-                            <p><?php the_excerpt(); ?></p>
-                            <a href="<?php the_permalink(); ?>" class="button mt-[15px] inline-block"><?php pll_e('More') ?></a>
+                        <article class="flex gap-[30px] items-start">
+                            <div class="thumb">
+                                <?php if (has_post_thumbnail()) : ?>
+                                    <?php the_post_thumbnail(); ?>
+                                <?php else : ?>
+                                    <img src="<?= bloginfo('template_url'); ?>/img/no-image.png" alt="">
+                                <?php endif; ?>
+                            </div>
+
+                            <div>
+                                <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+                                <p><?php the_excerpt(); ?></p>
+                                <a href="<?php the_permalink(); ?>" class="button mt-[15px] inline-block"><?php pll_e('More') ?></a>
+                            </div>
                         </article>
                     <?php
                     endwhile;

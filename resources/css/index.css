@@ -56,7 +56,10 @@ main {
         margin-left: 25px;
     }
 
-    ol {margin: 30px 0;}
+    ol {
+        margin: 30px 0;
+        counter-reset: myCounter;
+    }
     ol li:before {
         counter-increment: myCounter;
         content: counter(myCounter);
