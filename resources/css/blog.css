@@ -29,6 +29,9 @@
             flex-direction: column;
             gap: 15px;
             align-items: center;
+
+            h2 {display: none;}
+            h2.hidden {display: block;}
         }
     }
 }

@@ -6,8 +6,10 @@
 
         <?php if (have_posts()) : ?>
             <?php while(have_posts()) : the_post(); ?>
-                <a href="<?php the_permalink(); ?>" class="flex gap-[30px] items-center">
-                    <div class="thumb">
+                <a href="<?php the_permalink(); ?>" class="block mb-[30px] overflow-hidden">
+                    <h2 class="mt-[20px] !mt-[0px] hidden"><?php the_title(); ?></h2>
+
+                    <div class="thumb float-left mr-[20px] mb-[10px]">
                         <?php if (has_post_thumbnail()) : ?>
                             <?php the_post_thumbnail(); ?>
                         <?php else : ?>
@@ -15,10 +17,8 @@
                         <?php endif; ?>
                     </div>
 
-                    <div>
-                        <h2><?php the_title(); ?></h2>
-                        <div><?php the_excerpt(); ?></div>
-                    </div>
+                    <h2 class="mt-[0px]"><?php the_title(); ?></h2>
+                    <div><?= wp_trim_words(get_the_excerpt(), 40); ?></div>
                 </a>
             <?php endwhile; ?>
         <?php endif; ?>

@@ -22,8 +22,10 @@ get_header();
                     while ($query->have_posts()) :
                         $query->the_post();
                         ?>
-                        <article class="flex gap-[30px] items-start">
-                            <div class="thumb">
+                        <article class="block mb-[30px] overflow-hidden">
+                            <h2 class="mt-[20px] !mt-[0px] hidden"><?php the_title(); ?></h2>
+
+                            <div class="thumb float-left mr-[20px] mb-[10px]">
                                 <?php if (has_post_thumbnail()) : ?>
                                     <?php the_post_thumbnail(); ?>
                                 <?php else : ?>
@@ -31,11 +33,9 @@ get_header();
                                 <?php endif; ?>
                             </div>
 
-                            <div>
-                                <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-                                <p><?php the_excerpt(); ?></p>
-                                <a href="<?php the_permalink(); ?>" class="button mt-[15px] inline-block"><?php pll_e('More') ?></a>
-                            </div>
+                            <h2 class="mt-[0px]"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+                            <p><?= wp_trim_words(get_the_excerpt(), 40); ?></p>
+                            <a href="<?php the_permalink(); ?>" class="button mt-[15px] inline-block"><?php pll_e('More') ?></a>
                         </article>
                     <?php
                     endwhile;

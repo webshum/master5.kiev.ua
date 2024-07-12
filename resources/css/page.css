@@ -110,6 +110,9 @@
         a {
             flex-direction: column;
             gap: 0;
+
+            h2 {display: none;}
+            h2.hidden {display: block;}
         }
     }
 }
