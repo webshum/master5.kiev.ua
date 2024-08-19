@@ -1,5 +1,5 @@
 #header {
-    padding: 20px 0 10px 0;
+    padding: 20px 0 0 0;
     border-bottom: 1px solid #ededed;
     position: fixed;
     top: 0;
@@ -7,6 +7,8 @@
     right: 0;
     z-index: 99;
     background: #fff;
+
+    & > div:nth-child(2) {padding-bottom: 10px;}
 
     .center {
         padding-left: 0;
@@ -144,6 +146,26 @@
             stroke: var(--c-akcent);
             fill: none;
         }
+    }
+}
+
+.discount {
+    background: #000;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    font-size: 12px;
+
+    .center {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    a {text-decoration: underline;}
+    a:hover {
+        text-decoration: none;
+        color: #fff;
     }
 }
 

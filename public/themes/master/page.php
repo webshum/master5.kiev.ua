@@ -6,7 +6,7 @@
         <?php the_content(); ?>
 
         <?php
-            if ( comments_open() || get_comments_number() ) {
+            if ( (comments_open() || get_comments_number()) && empty(get_field('onoff_comments')) ) {
                 comments_template();
             }
         ?>

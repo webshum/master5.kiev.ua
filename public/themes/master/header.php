@@ -85,4 +85,22 @@
                     <?php endif; ?>
                 </address>
             </div>
+
+            <?php if (!empty(get_fields('options')['discount']['onoff'])) : ?>
+                <div class="discount">
+                    <div class="center">
+                        <p><?= get_fields('options')['discount']['title'] ?></p>
+
+                        <?php if (get_fields('options')['discount']['link']['url']) : ?>
+                            <?php $target = get_fields('options')['discount']['link']['target']; ?>
+                            <a
+                                href="<?= get_fields('options')['discount']['link']['url'] ?>"
+                                <?= (!empty($target)) ? 'target="_blank"' : ''; ?>
+                            >
+                                <?= get_fields('options')['discount']['link']['title'] ?> &#8250;
+                            </a>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            <?php endif; ?>
         </header>

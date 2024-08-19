@@ -1,7 +1,9 @@
     <footer id="footer">
         <div class="center">
             <div class="copy">© <?= date('Y') ?> <?= get_fields('options')['copyright'] ?> </div>
-            <div class="social"></div>
+            <?php if (!empty(get_fields('options')['work_time'])) : ?>
+                <div class="work-time"><?= get_fields('options')['work_time'] ?></div>
+            <?php endif; ?>
         </div>
     </footer>
 </div>

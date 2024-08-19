@@ -139,6 +139,7 @@ a:hover {
     background: var(--c-akcent);
     border-radius: 30px;
     color: #fff;
+    text-align: center;
     padding: 10px 15px;
     border: 2px solid transparent;
     &:hover {
