@@ -1,6 +1,6 @@
 #footer {
-    background: #000;
-    color: #fff;
+    background: #c4dac8;
+    color: var(--color);
     padding: 20px 0;
     text-align: center;
     font-size: 13px;
@@ -8,6 +8,7 @@
     .work-time {
         position: static;
         margin-top: 10px;
+        color: var(--color);
     }
 }
 

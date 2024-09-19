@@ -225,11 +225,6 @@ input[type="submit"] {
     flex-direction: column;
     min-height: 100vh;
     overflow-x: hidden;
-    padding-top: 132px;
-
-    @media (max-width: 768px) {
-        padding-top: 100px;
-    }
 }
 
 main {flex: 1;}

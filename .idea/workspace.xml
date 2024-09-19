@@ -6,14 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="69a4d29f-1b27-4662-80bf-47bf3f968e11" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/themes/master/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/themes/master/footer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/themes/master/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/themes/master/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/themes/master/page-blog.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/themes/master/page-blog.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/themes/master/page.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/themes/master/page.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/css/blog.css" beforeDir="false" afterPath="$PROJECT_DIR$/resources/css/blog.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/css/footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/resources/css/footer.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/css/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/resources/css/header.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/resources/css/index.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,7 +136,13 @@
       <workItem from="1721744775964" duration="2092000" />
       <workItem from="1721825585097" duration="1803000" />
       <workItem from="1722158311060" duration="1136000" />
-      <workItem from="1724055277085" duration="4428000" />
+      <workItem from="1724055277085" duration="5529000" />
+      <workItem from="1724072766109" duration="703000" />
+      <workItem from="1724332909027" duration="33000" />
+      <workItem from="1724403045186" duration="11000" />
+      <workItem from="1724403189832" duration="13000" />
+      <workItem from="1724696256761" duration="2071000" />
+      <workItem from="1724699855103" duration="3224000" />
     </task>
     <servers />
   </component>

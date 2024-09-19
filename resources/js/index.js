@@ -28,6 +28,31 @@ document.querySelector('.btn-nav').addEventListener('click', e => {
     document.body.classList.toggle('nav-open');
 });
 
+/* HEADER 
+---------------------------------------------------- */
+function header() {
+    const header = document.getElementById('header');
+    const bar = header.querySelector('.head-bar');
+    const home = document.querySelector('.wrapper');
+    
+    window.addEventListener('scroll', e => {
+        console.log('fixed');
+        if (window.scrollY >= bar.clientHeight) {
+            document.body.classList.add('fixd-header');
+            const headMain = document.querySelector('.head-main');
+
+            home.style.marginTop = `${headMain.clientHeight}px`;
+        } else {
+            document.body.classList.remove('fixd-header');
+            home.removeAttribute('style');
+        }
+    });
+}
+
+header();  
+
+/* POPUP 
+---------------------------------------------------- */
 function popup() {
     let btn = document.querySelectorAll('.btn-popup');
     let overlay = document.querySelector('.popup-overlay');

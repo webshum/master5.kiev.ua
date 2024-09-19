@@ -1,6 +1,16 @@
     <footer id="footer">
         <div class="center">
-            <div class="copy">© <?= date('Y') ?> <?= get_fields('options')['copyright'] ?> </div>
+            <div class="copy">
+                © <?= date('Y') ?> 
+                <?php 
+                    $lang = pll_current_language(); 
+
+                    if (!empty(get_fields('options')["copyright_{$lang}"])) {
+                        echo get_fields('options')["copyright_{$lang}"];
+                    }  
+                ?> 
+            </div>
+            
             <?php if (!empty(get_fields('options')['work_time'])) : ?>
                 <div class="work-time"><?= get_fields('options')['work_time'] ?></div>
             <?php endif; ?>
@@ -41,7 +51,15 @@
         <svg width="24" height="24"><use xlink:href="#close"></use></svg>
     </a>
 
-    <div class="body"><?= do_shortcode('[contact-form-7 id="ffd2730" title="Обратный звонок кнопка в заголовке"]'); ?></div>
+    <div class="body">
+        <?php 
+            if ($lang == 'ru') {
+                echo do_shortcode('[contact-form-7 id="ac007db"]');
+            } else {
+                echo do_shortcode('[contact-form-7 id="903d457"]');
+            }
+        ?>        
+    </div>
 </div>
 
 <svg class="hidden">
