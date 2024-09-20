@@ -42,4 +42,4 @@ jobs:
                   to: "${{ secrets.TELEGRAM_ID }}"
                   token: "${{ secrets.TELEGRAM_TOKEN }}"
                   message: |
-                      Deployment successful on branch ${{ github.ref }}
+                      Deployment successful master5.kiev.ua on branch ${{ github.ref }}
