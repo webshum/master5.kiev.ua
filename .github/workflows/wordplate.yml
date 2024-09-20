@@ -11,7 +11,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Check out code
-              uses: actions/checkout@v2
+              uses: actions/checkout@v3
 
             - name: Deploy to development
               if: github.ref == 'refs/heads/develop'
@@ -23,6 +23,8 @@ jobs:
                   script: |
                       cd /home/maste103/master5.kiev.ua/dev
                       git pull origin develop --force
+                      npm install
+                      npm run build
 
             - name: Deploy to production
               if: github.ref == 'refs/heads/master'
