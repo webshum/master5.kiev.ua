@@ -17,12 +17,12 @@ jobs:
               if: github.ref == 'refs/heads/develop'
               uses: appleboy/ssh-action@v1.0.3
               with:
-                  host: 91.206.201.58
-                  username: webshum
-                  password: Serhi199029
+                  host: "${{ secrets.HOST }}"
+                  username: "${{ secrets.USERNAME }}"
+                  password: "${{ secrets.PASSWORD }}"
                   script: |
-                      cd /home/webshum/web-shum.com.ua/kiev
-                      git pull origin develop
+                      cd /home/maste103/master5.kiev.ua/dev
+                      git pull origin develop --force
 
             - name: Deploy to production
               if: github.ref == 'refs/heads/master'
@@ -39,7 +39,7 @@ jobs:
               if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
               uses: appleboy/telegram-action@v0.1.0
               with:
-                  to: 483570610
-                  token: 7498219378:AAE_F1DBIKvMraKcyY7-ToHGA-KSTNqXrEM
+                  to: "${{ secrets.TELEGRAM_ID }}"
+                  token: "${{ secrets.TELEGRAM_TOKEN }}"
                   message: |
                       Deployment successful on branch ${{ github.ref }}
