@@ -23,8 +23,6 @@ jobs:
                   script: |
                       cd /home/maste103/master5.kiev.ua/dev
                       git pull origin develop --force
-                      npm install
-                      npm run build
 
             - name: Deploy to production
               if: github.ref == 'refs/heads/master'
