@@ -160,7 +160,7 @@ function custom_show_admin_bar( $show ) {
 }
 
 function hello_world_cf7_func() {
-     return "Привет! Я шорткод для Contact Form 7!";
+     return get_the_title();
 }
 add_shortcode('hello_world', 'hello_world_cf7_func');
 
