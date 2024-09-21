@@ -159,19 +159,16 @@ function custom_show_admin_bar( $show ) {
     }
 }
 
-function button_register_shortcode() {
-    add_shortcode('buttons', 'view_button');
+function hello_world_cf7_func() {
+     return "Привет! Я шорткод для Contact Form 7!";
 }
-add_action('init', 'button_register_shortcode');
+add_shortcode('hello_world', 'hello_world_cf7_func');
 
-function view_button($attrs) {
-    return 'Hello, world';
-}
+add_filter('wpcf7_mail_components', 'do_shortcode_mail', 10, 3);
+function do_shortcode_mail( $components, $contactForm, $mailComponent ){
+    if( isset($components['body']) ){
+        $components['body'] = do_shortcode($components['body']);
+    }
 
-add_filter( 'wpcf7_form_elements', 'mycustom_wpcf7_form_elements' );
-
-function mycustom_wpcf7_form_elements( $form ) {
-$form = do_shortcode( '[buttons]' );
-
-return $form;
+    return $components;
 }
