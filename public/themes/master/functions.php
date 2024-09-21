@@ -167,10 +167,6 @@ function hello_world_cf7_func() {
         return '';
     }
 
-    $title = get_the_title($post->ID);
-    $slug = $post->post_name;
-    $link = get_permalink($post->ID);
-
      return $slug;
 }
 add_shortcode('page_title', 'hello_world_cf7_func');
