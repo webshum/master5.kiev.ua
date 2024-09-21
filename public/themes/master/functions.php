@@ -162,7 +162,7 @@ function custom_show_admin_bar( $show ) {
 function hello_world_cf7_func() {
      return get_the_title();
 }
-add_shortcode('hello_world', 'hello_world_cf7_func');
+add_shortcode('page_title', 'hello_world_cf7_func');
 
 add_filter('wpcf7_mail_components', 'do_shortcode_mail', 10, 3);
 function do_shortcode_mail( $components, $contactForm, $mailComponent ){
