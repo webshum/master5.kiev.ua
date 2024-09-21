@@ -159,8 +159,11 @@ function custom_show_admin_bar( $show ) {
     }
 }
 
-
-function cf7_page_title_shortcode() {
-    return "Hello, ";
+function button_register_shortcode() {
+    add_shortcode('buttons', 'view_button');
 }
-add_shortcode('page_title', 'cf7_page_title_shortcode');
+add_action('init', 'button_register_shortcode');
+
+function view_button($attrs) {
+    return 'Hello, world';
+}
