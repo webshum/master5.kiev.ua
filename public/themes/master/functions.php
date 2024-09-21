@@ -159,8 +159,19 @@ function custom_show_admin_bar( $show ) {
     }
 }
 
+
 function hello_world_cf7_func() {
-     return get_the_title();
+    global $post;
+
+    if ( ! $post ) {
+        return '';
+    }
+
+    $title = get_the_title($post->ID);
+    $slug = $post->post_name;
+    $link = get_permalink($post->ID);
+
+     return $slug;
 }
 add_shortcode('page_title', 'hello_world_cf7_func');
 
