@@ -160,7 +160,7 @@ function custom_show_admin_bar( $show ) {
 }
 
 
-function hello_world_cf7_func() {
+function page_title_cf7_func() {
     global $post;
 
     if ( ! $post ) {
@@ -171,9 +171,9 @@ function hello_world_cf7_func() {
     $slug = $post->post_name;
     $link = get_permalink($post->ID);
 
-     return $slug . 'slug';
+    return 'slug helkdlfjs';
 }
-add_shortcode('page_title', 'hello_world_cf7_func');
+add_shortcode('page_title', 'page_title_cf7_func');
 
 add_filter('wpcf7_mail_components', 'do_shortcode_mail', 10, 3);
 function do_shortcode_mail( $components, $contactForm, $mailComponent ){
