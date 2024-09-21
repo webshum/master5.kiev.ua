@@ -164,7 +164,7 @@ function custom_show_admin_bar( $show ) {
 add_filter('wpcf7_mail_components', 'cf7_do_shortcode_in_mail_components');
 
 function cf7_do_shortcode_in_mail_components($components) {
-    $components['body'] = do_shortcode($components['body']);
+    $components['body'] = do_shortcode($components['page_title']);
     return $components;
 }
 
