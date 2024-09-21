@@ -159,7 +159,10 @@ function custom_show_admin_bar( $show ) {
     }
 }
 
-function cf7_page_title_shortcode() {
-    return 'hello, dsdf';
+
+
+wpcf7_add_shortcode('custom_date', 'wpcf7_custom_date_shortcode_handler', true);
+
+function wpcf7_custom_date_shortcode_handler($tag) {
+    return "date";
 }
-add_shortcode('page_title', 'cf7_page_title_shortcode');
