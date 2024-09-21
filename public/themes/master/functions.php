@@ -158,28 +158,3 @@ function custom_show_admin_bar( $show ) {
         return false;
     }
 }
-
-
-function page_title_cf7_func() {
-    global $post;
-
-    if ( ! $post ) {
-        return '';
-    }
-
-    $title = get_the_title($post->ID);
-    $slug = $post->post_name;
-    $link = get_permalink($post->ID);
-
-    return 'slug helkdlfjs';
-}
-add_shortcode('page_title', 'page_title_cf7_func');
-
-add_filter('wpcf7_mail_components', 'do_shortcode_mail', 10, 3);
-function do_shortcode_mail( $components, $contactForm, $mailComponent ){
-    if( isset($components['body']) ){
-        $components['body'] = do_shortcode($components['body']);
-    }
-
-    return $components;
-}
