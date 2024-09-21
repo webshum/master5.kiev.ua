@@ -167,3 +167,11 @@ add_action('init', 'button_register_shortcode');
 function view_button($attrs) {
     return 'Hello, world';
 }
+
+add_filter( 'wpcf7_form_elements', 'mycustom_wpcf7_form_elements' );
+
+function mycustom_wpcf7_form_elements( $form ) {
+$form = do_shortcode( '[buttons]' );
+
+return $form;
+}
