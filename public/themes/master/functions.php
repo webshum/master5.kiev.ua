@@ -161,8 +161,14 @@ function custom_show_admin_bar( $show ) {
 
 
 
-wpcf7_add_shortcode('custom_date', 'wpcf7_custom_date_shortcode_handler', true);
+add_filter('wpcf7_mail_components', 'cf7_do_shortcode_in_mail_components');
 
-function wpcf7_custom_date_shortcode_handler($tag) {
-    return "date";
+function cf7_do_shortcode_in_mail_components($components) {
+    $components['body'] = do_shortcode($components['body']);
+    return $components;
 }
+
+function cf7_page_title_shortcode() {
+    return get_the_title();
+}
+add_shortcode('page_title', 'cf7_page_title_shortcode');
