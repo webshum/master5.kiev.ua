@@ -33,7 +33,7 @@ jobs:
                   password: "${{ secrets.PASSWORD }}"
                   script: |
                       cd /home/maste103/master5.kiev.ua/www
-                      git pull origin develop --force
+                      git pull origin master --force
 
             - name: Send Telegram message
               if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
