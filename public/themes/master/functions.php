@@ -36,6 +36,7 @@ pll_register_string( 'fresh-comments', 'Fresh comments', 'WordPress' );
 pll_register_string( 'tel', 'Tel', 'WordPress' );
 pll_register_string( 'name', 'Name', 'WordPress' );
 pll_register_string( 'submit', 'Submit', 'WordPress' );
+pll_register_string( 'form_success', 'FormSuccess', 'WordPress' );
 
 // Open comments
 add_filter( 'comments_open', function($open, $post_id) {
