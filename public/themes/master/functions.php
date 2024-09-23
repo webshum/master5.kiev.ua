@@ -201,7 +201,8 @@ function send_form() {
     if (!empty($_POST['message'])) $message = $_POST['message'];
     if (!empty($_POST['url'])) $url = $_POST['url'];
 
-    $to = get_option('admin_email');
+    // $to = get_option('admin_email');
+    $to = "shumjachi@gmail.com";
     $subject = 'Замовлення з autogaraje1.com';
 
     $body = '<html>
