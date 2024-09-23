@@ -58,7 +58,13 @@
             } else {
                 echo do_shortcode('[contact-form-7 id="903d457"]');
             }
-        ?>        
+        ?>    
+
+        <form id="contact-form" method="POST" name="order">
+            <input type="text" name="first_name" required>
+            <input type="tel" name="phone" required>
+            <button type="submit">Submit</button>
+        </form>  
     </div>
 </div>
 
