@@ -209,7 +209,7 @@ function send_form() {
     if (!empty($_POST['title'])) $title = $_POST['title'];
 
     // $to = get_option('admin_email');
-    $to = "shumjachi@gmail.com";
+    $to = "info@master5.kiev.ua";
     $subject = 'Order with master5.kiev.ua';
 
     $body = '<html>
