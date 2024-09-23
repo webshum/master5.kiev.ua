@@ -212,6 +212,7 @@ function send_form() {
     $to = "info@master5.kiev.ua";
     $subject = 'Order with master5.kiev.ua';
 
+
     $body = '<html>
         <head>
           <title>Order with master5.kiev.ua</title>
