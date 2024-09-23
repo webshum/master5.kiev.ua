@@ -252,13 +252,13 @@ main {flex: 1;}
 
 .popup {
     position: fixed;
+    top: 50% !important;
     left: 50%;
     z-index: 9992;
-    transform: translate(-50%, -050%);
+    transform: translate(-50%, -50%);
     background: #fff;
     padding: 30px;
     border-radius: 30px;
-    
 
     .popup-close {
         position: absolute;
@@ -305,7 +305,7 @@ main {flex: 1;}
 
     form {
         & > p {margin: 15px 0;}
-        br {display: none;}
+        
         .wpcf7-form-control-wrap {
             margin-bottom: 35px;
             display: block;

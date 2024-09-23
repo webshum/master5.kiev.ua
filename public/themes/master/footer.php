@@ -51,19 +51,11 @@
         <svg width="24" height="24"><use xlink:href="#close"></use></svg>
     </a>
 
-    <div class="body">
-        <?php 
-            if ($lang == 'ru') {
-                echo do_shortcode('[contact-form-7 id="ac007db"]');
-            } else {
-                echo do_shortcode('[contact-form-7 id="903d457"]');
-            }
-        ?>    
-
+    <div class="body">  
         <form id="contact-form" method="POST" name="order">
             <input type="text" name="first_name" placeholder="<?= pll__('Name') ?>" required><br>
-            <input type="tel" name="phone" placeholder="<?= pll__('Phone') ?>" required>
-            <input type="submit"><?= pll__('Submit') ?></input>
+            <input type="tel" name="phone" placeholder="<?= pll__('Phone') ?>" required><br>
+            <input type="submit" value="<?= pll__('Submit') ?>">
         </form>  
     </div>
 </div>
