@@ -33,6 +33,9 @@ pll_register_string( 'website', 'Website', 'WordPress' );
 pll_register_string( 'more', 'More', 'WordPress' );
 pll_register_string( 'fresh-posts', 'Fresh posts', 'WordPress' );
 pll_register_string( 'fresh-comments', 'Fresh comments', 'WordPress' );
+pll_register_string( 'tel', 'Tel', 'WordPress' );
+pll_register_string( 'name', 'Name', 'WordPress' );
+pll_register_string( 'submit', 'Submit', 'WordPress' );
 
 // Open comments
 add_filter( 'comments_open', function($open, $post_id) {
@@ -65,8 +68,6 @@ add_filter('script_loader_tag', function (string $tag, string $handle, string $s
     if (in_array($handle, ['vite', 'wordplate'])) {
         return '<script type="module" src="' . esc_url($src) . '" defer></script>';
     }
-
-    wp_localize_script('ajax-script', 'ajaxurl', admin_url('admin-ajax.php'));
 
     return $tag;
 }, 10, 3);
