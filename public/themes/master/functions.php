@@ -66,6 +66,8 @@ add_filter('script_loader_tag', function (string $tag, string $handle, string $s
         return '<script type="module" src="' . esc_url($src) . '" defer></script>';
     }
 
+    wp_localize_script('ajax-script', 'ajaxurl', admin_url('admin-ajax.php'));
+
     return $tag;
 }, 10, 3);
 
@@ -158,3 +160,77 @@ function custom_show_admin_bar( $show ) {
         return false;
     }
 }
+
+/*
+|--------------------------------------------------------------------------
+| AJAX FORM
+|--------------------------------------------------------------------------
+*/
+function javascript_variables(){ ?>
+    <script type="text/javascript">
+        const ajax_url = '<?php echo admin_url( "admin-ajax.php" ); ?>';
+        const ajax_nonce = '<?php echo wp_create_nonce( "secure_nonce_name" ); ?>';
+    </script><?php
+}
+add_action ( 'wp_head', 'javascript_variables' );
+
+add_action('wp_ajax_send', 'send_form');
+add_action('wp_ajax_nopriv_send', 'send_form');
+
+function send_form() {
+    $first_name = '';
+    $last_name = '';
+    $phone = '';
+    $email = '';
+    $date = '';
+    $mounth = '';
+    $year = '';
+    $time = '';
+    $model = '';
+    $message = '';
+
+    if (!empty($_POST['first_name'])) $first_name = $_POST['first_name'];
+    if (!empty($_POST['last_name'])) $last_name = $_POST['last_name'];
+    if (!empty($_POST['phone'])) $phone = $_POST['phone'];
+    if (!empty($_POST['email'])) $email = $_POST['email'];
+    if (!empty($_POST['date'])) $date = $_POST['date'];
+    if (!empty($_POST['mounth'])) $mounth = $_POST['mounth'];
+    if (!empty($_POST['year'])) $year = $_POST['year'];
+    if (!empty($_POST['time'])) $time = $_POST['time'];
+    if (!empty($_POST['model'])) $model = $_POST['model'];
+    if (!empty($_POST['message'])) $message = $_POST['message'];
+    if (!empty($_POST['url'])) $url = $_POST['url'];
+
+    $to = get_option('admin_email');
+    $subject = 'Замовлення з autogaraje1.com';
+
+    $body = '<html>
+        <head>
+          <title>Замовлення з autogaraje1.com</title>
+        </head>
+        <body>';
+
+    if (!empty($first_name)) $body .= "Ім'я: $first_name $last_name<br>";
+    if (!empty($phone)) $body .= 'Телефон: ' . $phone . '<br>';
+    if (!empty($email)) $body .= 'Email: ' . $email . '<br>';
+    if (!empty($date)) $body .= 'Дата: ' . $date . '<br>';
+    if (!empty($mounth)) $body .= 'Місяць: ' . $mounth . '<br>';
+    if (!empty($year)) $body .= 'Рік: ' . $year . '<br>';
+    if (!empty($time)) $body .= 'Час: ' . $time . '<br>';
+    if (!empty($model)) $body .= 'Модель: ' . $model . '<br>';
+    if (!empty($message)) $body .= 'Повідомлення: ' . $message . '<br>';
+    if (!empty($url)) $body .= 'Посилання: ' . $url . '<br>';
+
+    $body .= '</body></html>';
+    
+    $headers[] = 'MIME-Version: 1.0';
+    $headers[] = 'Content-type: text/html; charset=iso-8859-1';
+    
+    // $result = mail($to, $subject, $body, implode("\r\n", $headers));
+     
+    wp_mail( $to, $subject, $body, $headers );
+    
+    echo 'Done!';
+    wp_die();
+}
+
