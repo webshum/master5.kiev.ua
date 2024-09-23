@@ -101,8 +101,10 @@ if (document.forms.order != null) {
         const email = e.target.email ? e.target.email.value : '';
         const date = e.target.date ? e.target.date.value : '';
         const time = e.target.time ? e.target.time.value : '';
-        const url = window.location.pathname;
-        const data = `first_name=${first_name}&last_name=${last_name}&phone=${phone}&email=${email}&date=${date}&time=${time}&url=${url}&action=send`;
+        const title = e.target.title ? e.target.title.value : '';
+        const link = window.location.href;
+        const slug = window.location.pathname;
+        const data = `first_name=${first_name}&last_name=${last_name}&phone=${phone}&email=${email}&date=${date}&time=${time}&title=${title}&slug=${slug}&link=${link}&action=send`;
         
         submitForm(e.target, data);
     });

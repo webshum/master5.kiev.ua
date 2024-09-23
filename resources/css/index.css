@@ -335,6 +335,8 @@ main {flex: 1;}
             line-height: 1;
             font-size: 13px;
             margin-top: 20px;
+            text-align: center;
+            font-weight: 500;
         }
 
         .wpcf7-spinner {

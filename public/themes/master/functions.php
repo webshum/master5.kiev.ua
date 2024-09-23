@@ -190,6 +190,9 @@ function send_form() {
     $time = '';
     $model = '';
     $message = '';
+    $slug = '';
+    $link = '';
+    $title = '';
 
     if (!empty($_POST['first_name'])) $first_name = $_POST['first_name'];
     if (!empty($_POST['last_name'])) $last_name = $_POST['last_name'];
@@ -201,15 +204,17 @@ function send_form() {
     if (!empty($_POST['time'])) $time = $_POST['time'];
     if (!empty($_POST['model'])) $model = $_POST['model'];
     if (!empty($_POST['message'])) $message = $_POST['message'];
-    if (!empty($_POST['url'])) $url = $_POST['url'];
+    if (!empty($_POST['slug'])) $slug = $_POST['slug'];
+    if (!empty($_POST['link'])) $link = $_POST['link'];
+    if (!empty($_POST['title'])) $title = $_POST['title'];
 
     // $to = get_option('admin_email');
     $to = "shumjachi@gmail.com";
-    $subject = 'Замовлення з autogaraje1.com';
+    $subject = 'Order with master5.kiev.ua';
 
     $body = '<html>
         <head>
-          <title>Замовлення з autogaraje1.com</title>
+          <title>Order with master5.kiev.ua</title>
         </head>
         <body>';
 
@@ -222,7 +227,9 @@ function send_form() {
     if (!empty($time)) $body .= 'Час: ' . $time . '<br>';
     if (!empty($model)) $body .= 'Модель: ' . $model . '<br>';
     if (!empty($message)) $body .= 'Повідомлення: ' . $message . '<br>';
-    if (!empty($url)) $body .= 'Посилання: ' . $url . '<br>';
+    if (!empty($slug)) $body .= 'Сторіка: ' . $slug . '<br>';
+    if (!empty($link)) $body .= 'Посилання: ' . $link . '<br>';
+    if (!empty($title)) $body .= 'Заголовок: ' . $title . '<br>';
 
     $body .= '</body></html>';
     

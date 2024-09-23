@@ -53,6 +53,7 @@
 
     <div class="body">  
         <form id="contact-form" method="POST" name="order">
+            <input type="hidden" value="<?= the_title() ?>">
             <input type="text" name="first_name" placeholder="<?= pll__('Name') ?>" required><br>
             <input type="tel" name="phone" placeholder="<?= pll__('Phone') ?>" required><br>
             <input type="submit" value="<?= pll__('Submit') ?>">
