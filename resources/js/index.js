@@ -128,6 +128,7 @@ function submitForm(form, data) {
             form.querySelector('.hidden').classList.remove('hidden');
             form.querySelector('input[type="submit"]').value = submitName;
         }
+
     }
 
     xhr.onerror = () => {
