@@ -112,6 +112,9 @@ if (document.forms.order != null) {
 
 function submitForm(form, data) {
     form.classList.add('preload');
+    const submitName = form.querySelector('input[type="submit"]').value;
+
+    form.querySelector('input[type="submit"]').value = '...';
 
     const xhr = new XMLHttpRequest();
     xhr.open('POST', ajax_url);
@@ -123,6 +126,7 @@ function submitForm(form, data) {
             form.classList.remove('preload');
             form.reset();
             form.querySelector('.hidden').classList.remove('hidden');
+            form.querySelector('input[type="submit"]').value = submitName;
         }
     }
 
