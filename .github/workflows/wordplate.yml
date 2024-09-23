@@ -28,12 +28,12 @@ jobs:
               if: github.ref == 'refs/heads/master'
               uses: appleboy/ssh-action@v1.0.3
               with:
-                  host: 91.206.201.58
-                  username: webshum
-                  password: Serhi199029
+                  host: "${{ secrets.HOST }}"
+                  username: "${{ secrets.USERNAME }}"
+                  password: "${{ secrets.PASSWORD }}"
                   script: |
-                      cd /home/webshum/web-shum.com.ua/kiev
-                      git pull origin master
+                      cd /home/maste103/master5.kiev.ua/www
+                      git pull origin develop --force
 
             - name: Send Telegram message
               if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
