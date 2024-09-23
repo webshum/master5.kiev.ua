@@ -91,3 +91,42 @@ function popup() {
 }
 
 popup();
+
+/* SUBMIT
+---------------------------------------------------- */ 
+if (document.forms.order != null) {
+    document.forms.order.addEventListener('submit', e => {
+        e.preventDefault();
+
+        const first_name = e.target.first_name.value;
+        const last_name = e.target.last_name.value;
+        const phone = e.target.phone.value;
+        const email = e.target.email.value;
+        const date = e.target.date.value;
+        const time = e.target.time.value;
+        const url = window.location.href;
+        const data = `first_name=${first_name}&last_name=${last_name}&phone=${phone}&email=${email}&date=${date}&time=${time}&url=${url}&action=send`;
+        
+        submitForm(e.target, data);
+    });
+}
+
+function submitForm(form, data) {
+    form.classList.add('preload');
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', ajax_url);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send(data);
+
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            form.classList.remove('preload');
+            form.reset();
+        }
+    }
+
+    xhr.onerror = () => {
+        console.log('Network error!');
+    }
+}

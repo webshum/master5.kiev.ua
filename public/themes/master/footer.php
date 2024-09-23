@@ -61,9 +61,9 @@
         ?>    
 
         <form id="contact-form" method="POST" name="order">
-            <input type="text" name="first_name" required>
-            <input type="tel" name="phone" required>
-            <button type="submit">Submit</button>
+            <input type="text" name="first_name" placeholder="<?= pll__('Name') ?>" required><br>
+            <input type="tel" name="phone" placeholder="<?= pll__('Phone') ?>" required>
+            <input type="submit"><?= pll__('Submit') ?></input>
         </form>  
     </div>
 </div>
