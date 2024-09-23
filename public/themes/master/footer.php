@@ -56,6 +56,8 @@
             <input type="text" name="first_name" placeholder="<?= pll__('Name') ?>" required><br>
             <input type="tel" name="phone" placeholder="<?= pll__('Phone') ?>" required><br>
             <input type="submit" value="<?= pll__('Submit') ?>">
+
+            <div class="hidden wpcf7-response-output"><?= pll__('FormSuccess') ?></div>
         </form>  
     </div>
 </div>

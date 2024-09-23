@@ -94,14 +94,14 @@ popup();
 if (document.forms.order != null) {
     document.forms.order.addEventListener('submit', e => {
         e.preventDefault();
-        
-        const first_name = e.target.first_name ? e.target.first_name.value || null : null;
-        const last_name = e.target.last_name ? e.target.last_name.value || null : null;
-        const phone = e.target.phone ? e.target.phone.value || null : null;
-        const email = e.target.email ? e.target.email.value || null : null;
-        const date = e.target.date ? e.target.date.value || null : null;
-        const time = e.target.time ? e.target.time.value || null : null;
-        const url = window.location.href;
+
+        const first_name = e.target.first_name ? e.target.first_name.value : '';
+        const last_name = e.target.last_name ? e.target.last_name.value : '';
+        const phone = e.target.phone ? e.target.phone.value : '';
+        const email = e.target.email ? e.target.email.value : '';
+        const date = e.target.date ? e.target.date.value : '';
+        const time = e.target.time ? e.target.time.value : '';
+        const url = window.location.pathname;
         const data = `first_name=${first_name}&last_name=${last_name}&phone=${phone}&email=${email}&date=${date}&time=${time}&url=${url}&action=send`;
         
         submitForm(e.target, data);
@@ -120,6 +120,7 @@ function submitForm(form, data) {
         if (xhr.readyState === 4 && xhr.status === 200) {
             form.classList.remove('preload');
             form.reset();
+            form.querySelector('.hidden').classList.remove('hidden');
         }
     }
 
