@@ -1,7 +1,5 @@
 <?php
 
-require dirname(dirname(ABSPATH)) . '/vendor/autoload.php';
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 
@@ -260,19 +258,33 @@ function send_comment_email($comment_id) {
     $comment = get_comment($comment_id);
     $post = get_post($comment->comment_post_ID);
 
-    $mailer = new PHPMailer(true);
-    $mailer->isSMTP();
-    $mailer->SMTPAutoTLS = false;
-    $mailer->SMTPAuth = env('MAIL_USERNAME') && env('MAIL_PASSWORD');
-    $mailer->SMTPDebug = env('WP_DEBUG') ? SMTP::DEBUG_SERVER : SMTP::DEBUG_OFF;
-    $mailer->SMTPSecure = env('MAIL_ENCRYPTION', 'tls');
-    $mailer->Debugoutput = 'error_log';
-    $mailer->Host = env('MAIL_HOST');
-    $mailer->Port = env('MAIL_PORT', 587);
-    $mailer->Username = env('MAIL_USERNAME');
-    $mailer->Password = env('MAIL_PASSWORD');
+    // $to = "info@master5.kiev.ua";
+    $subject = 'Новий коментар на вашому сайті';
+    $to = "shumjachi@gmail.com";
+    $message = sprintf(
+        "Користувач: %s\nСайт: %s\nКоментар: %s\n\nПерейти до коментаря: %s",
+        $comment->comment_author,
+        $comment->comment_author_url,
+        $comment->comment_content,
+        get_permalink($post)
+    );
 
-    dd($mailer);
+    $body = '<html>
+        <head>
+          <title>Order with master5.kiev.ua</title>
+        </head>
+        <body>';
+
+    $body .= 'Hello';
+
+    $body .= '</body></html>';
+
+    $headers[] = 'MIME-Version: 1.0';
+    $headers[] = 'Content-type: text/html; charset=iso-8859-1';
+
+    wp_mail($to, $subject, $message, $headers);
+
+    dd($message);
 }
 
 add_action('comment_post', 'send_comment_email', 11, 2);
