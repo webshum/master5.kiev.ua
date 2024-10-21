@@ -269,7 +269,21 @@ function send_comment_email($comment_id) {
         get_permalink($post)
     );
 
-    wp_mail($to, $subject, $message);
+    $body = '<html>
+        <head>
+          <title>Order with master5.kiev.ua</title>
+        </head>
+        <body>';
+
+    $body .= $message;
+
+    $body .= '</body></html>';
+
+    $headers[] = 'MIME-Version: 1.0';
+    $headers[] = 'Content-type: text/html; charset=iso-8859-1';
+
+    wp_mail($to, $subject, $message, $headers);
 }
+
 add_action('wp_insert_comment', 'send_comment_email');
 
