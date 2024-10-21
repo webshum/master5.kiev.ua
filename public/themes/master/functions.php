@@ -258,7 +258,7 @@ function send_comment_email($comment_id) {
     $comment = get_comment($comment_id);
     $post = get_post($comment->comment_post_ID);
 
-    $to = "info@master5.kiev.ua";
+    // $to = "info@master5.kiev.ua";
     $subject = 'Новий коментар на вашому сайті';
     $to = "shumjachi@gmail.com";
     $message = sprintf(
@@ -275,7 +275,7 @@ function send_comment_email($comment_id) {
         </head>
         <body>';
 
-    $body .= $message;
+    $body .= 'Hello';
 
     $body .= '</body></html>';
 
@@ -283,9 +283,6 @@ function send_comment_email($comment_id) {
     $headers[] = 'Content-type: text/html; charset=iso-8859-1';
 
     wp_mail($to, $subject, $message, $headers);
-
-    echo 'Done!';
-    wp_die();
 }
 
 add_action('comment_post', 'send_comment_email', 11, 2);
