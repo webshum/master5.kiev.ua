@@ -254,45 +254,13 @@ if ( function_exists('yoast_breadcrumb') ) {
 | SEND COMMENT TO EMAIL
 |--------------------------------------------------------------------------
 */
-function send_comment_email($comment_id) {
-    // Отримуємо коментар
+function send_comment_email($comment_id, PHPMailer $mailer) {
     $comment = get_comment($comment_id);
     $post = get_post($comment->comment_post_ID);
 
-    // Підключаємо PHPMailer через глобальну змінну
     global $phpmailer;
 
-    // Налаштування отримувача
-    $recipient = 'shumjachi@gmail.com'; // Ваша електронна адреса
-
-    // Тема та тіло повідомлення
-    $subject = 'Новий коментар на вашому сайті';
-    $phpmailer->Subject = $subject;
-
-    $body = '<html>
-                <head>
-                  <title>' . esc_html($subject) . '</title>
-                </head>
-                <body>';
-    $body .= 'Користувач: ' . esc_html($comment->comment_author) . '<br>';
-    $body .= 'Сайт: ' . esc_html($comment->comment_author_url) . '<br>';
-    $body .= 'Коментар: ' . esc_html($comment->comment_content) . '<br>';
-    $body .= 'Перейти до коментаря: <a href="' . esc_url(get_permalink($post)) . '">' . esc_url(get_permalink($post)) . '</a>';
-    $body .= '</body></html>';
-
-    $phpmailer->Body = $body;
-    $phpmailer->isHTML(true); // Встановлюємо формат на HTML
-
-    // Додаємо одержувача
-    $phpmailer->addAddress($recipient);
-
-    // Відправка листа
-    if (!$phpmailer->send()) {
-        error_log('Помилка при відправленні листа: ' . $phpmailer->ErrorInfo);
-    } else {
-        // Лист успішно відправлено (опційно)
-        // echo 'Лист успішно відправлено!';
-    }
+    dd($phpmailer);
 }
 
 add_action('comment_post', 'send_comment_email', 11, 2);
