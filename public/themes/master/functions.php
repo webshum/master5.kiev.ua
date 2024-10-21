@@ -257,10 +257,10 @@ if ( function_exists('yoast_breadcrumb') ) {
 function send_comment_email($comment_id) {
     $comment = get_comment($comment_id);
     $post = get_post($comment->comment_post_ID);
+    
+    global $mailer;
 
-    global $phpmailer;
-
-    dd($phpmailer);
+    dd($mailer);
 }
 
 add_action('comment_post', 'send_comment_email', 11, 2);
