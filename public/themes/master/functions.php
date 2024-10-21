@@ -255,30 +255,19 @@ if ( function_exists('yoast_breadcrumb') ) {
 |--------------------------------------------------------------------------
 */
 function send_comment_email($comment_id) {
-    // Отримуємо коментар та пост
+    // Отримуємо коментар
     $comment = get_comment($comment_id);
     $post = get_post($comment->comment_post_ID);
 
-    // Налаштовуємо PHPMailer
-    $mailer = new PHPMailer\PHPMailer\PHPMailer();
+    // Підключаємо PHPMailer через глобальну змінну
+    global $phpmailer;
 
-    $mailer->isSMTP();
-    $mailer->Host = env('MAIL_HOST');
-    $mailer->SMTPAuth = true;
-    $mailer->Username = env('MAIL_USERNAME');
-    $mailer->Password = env('MAIL_PASSWORD');
-    $mailer->SMTPSecure = env('MAIL_ENCRYPTION', 'tls');
-    $mailer->Port = env('MAIL_PORT', 587);
-
-    // Відправник
-    $mailer->setFrom(env('MAIL_FROM_ADDRESS', 'hello@example.com'), env('MAIL_FROM_NAME', 'Example'));
-
-    // Одержувач
-    $mailer->addAddress('shumjachi@gmail.com'); // Вашу електронну пошту
+    // Налаштування отримувача
+    $recipient = 'shumjachi@gmail.com'; // Ваша електронна адреса
 
     // Тема та тіло повідомлення
     $subject = 'Новий коментар на вашому сайті';
-    $mailer->Subject = $subject;
+    $phpmailer->Subject = $subject;
 
     $body = '<html>
                 <head>
@@ -291,14 +280,17 @@ function send_comment_email($comment_id) {
     $body .= 'Перейти до коментаря: <a href="' . esc_url(get_permalink($post)) . '">' . esc_url(get_permalink($post)) . '</a>';
     $body .= '</body></html>';
 
-    $mailer->Body    = $body;
-    $mailer->isHTML(true); // Встановлюємо формат на HTML
+    $phpmailer->Body = $body;
+    $phpmailer->isHTML(true); // Встановлюємо формат на HTML
+
+    // Додаємо одержувача
+    $phpmailer->addAddress($recipient);
 
     // Відправка листа
-    if (!$mailer->send()) {
-        error_log('Помилка при відправленні листа: ' . $mailer->ErrorInfo);
+    if (!$phpmailer->send()) {
+        error_log('Помилка при відправленні листа: ' . $phpmailer->ErrorInfo);
     } else {
-        // Лист успішно відправлено (опційно можна вивести повідомлення)
+        // Лист успішно відправлено (опційно)
         // echo 'Лист успішно відправлено!';
     }
 }
