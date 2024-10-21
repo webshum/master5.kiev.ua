@@ -257,8 +257,18 @@ if ( function_exists('yoast_breadcrumb') ) {
 function send_comment_email($comment_id) {
     $comment = get_comment($comment_id);
     $post = get_post($comment->comment_post_ID);
-    
-    global $mailer;
+
+    $mailer = new PHPMailer();
+    $mailer->isSMTP();
+    $mailer->SMTPAutoTLS = false;
+    $mailer->SMTPAuth = env('MAIL_USERNAME') && env('MAIL_PASSWORD');
+    $mailer->SMTPDebug = env('WP_DEBUG') ? SMTP::DEBUG_SERVER : SMTP::DEBUG_OFF;
+    $mailer->SMTPSecure = env('MAIL_ENCRYPTION', 'tls');
+    $mailer->Debugoutput = 'error_log';
+    $mailer->Host = env('MAIL_HOST');
+    $mailer->Port = env('MAIL_PORT', 587);
+    $mailer->Username = env('MAIL_USERNAME');
+    $mailer->Password = env('MAIL_PASSWORD');
 
     dd($mailer);
 }
