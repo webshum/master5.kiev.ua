@@ -261,13 +261,13 @@ function send_comment_email($comment_id) {
     // $to = "info@master5.kiev.ua";
     $subject = 'Новий коментар на вашому сайті';
     $to = "shumjachi@gmail.com";
-    $message = sprintf(
+    /*$message = sprintf(
         "Користувач: %s\nСайт: %s\nКоментар: %s\n\nПерейти до коментаря: %s",
         $comment->comment_author,
         $comment->comment_author_url,
         $comment->comment_content,
         get_permalink($post)
-    );
+    );*/
 
     $body = '<html>
         <head>
