@@ -258,7 +258,7 @@ function send_comment_email($comment_id) {
     $comment = get_comment($comment_id);
     $post = get_post($comment->comment_post_ID);
 
-    $mailer = new PHPMailer();
+    $mailer = new PHPMailer(true);
     $mailer->isSMTP();
     $mailer->SMTPAutoTLS = false;
     $mailer->SMTPAuth = env('MAIL_USERNAME') && env('MAIL_PASSWORD');
