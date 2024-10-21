@@ -248,3 +248,28 @@ function send_form() {
 if ( function_exists('yoast_breadcrumb') ) {
     yoast_breadcrumb( '<p id="breadcrumbs">','</p>' );
 }
+
+/*
+|--------------------------------------------------------------------------
+| SEND COMMENT TO EMAIL
+|--------------------------------------------------------------------------
+*/
+function send_comment_email($comment_id) {
+    $comment = get_comment($comment_id);
+    $post = get_post($comment->comment_post_ID);
+
+    $to = "info@master5.kiev.ua";
+    $subject = 'Новий коментар на вашому сайті';
+    $to = "shumjachi@gmail.com";
+    $message = sprintf(
+        "Користувач: %s\nСайт: %s\nКоментар: %s\n\nПерейти до коментаря: %s",
+        $comment->comment_author,
+        $comment->comment_author_url,
+        $comment->comment_content,
+        get_permalink($post)
+    );
+
+    wp_mail($to, $subject, $message);
+}
+add_action('wp_insert_comment', 'send_comment_email');
+
