@@ -255,34 +255,52 @@ if ( function_exists('yoast_breadcrumb') ) {
 |--------------------------------------------------------------------------
 */
 function send_comment_email($comment_id) {
+    // Отримуємо коментар та пост
     $comment = get_comment($comment_id);
     $post = get_post($comment->comment_post_ID);
 
-    // $to = "info@master5.kiev.ua";
+    // Налаштовуємо PHPMailer
+    $mailer = new PHPMailer\PHPMailer\PHPMailer();
+
+    $mailer->isSMTP();
+    $mailer->Host = env('MAIL_HOST');
+    $mailer->SMTPAuth = true;
+    $mailer->Username = env('MAIL_USERNAME');
+    $mailer->Password = env('MAIL_PASSWORD');
+    $mailer->SMTPSecure = env('MAIL_ENCRYPTION', 'tls');
+    $mailer->Port = env('MAIL_PORT', 587);
+
+    // Відправник
+    $mailer->setFrom(env('MAIL_FROM_ADDRESS', 'hello@example.com'), env('MAIL_FROM_NAME', 'Example'));
+
+    // Одержувач
+    $mailer->addAddress('shumjachi@gmail.com'); // Вашу електронну пошту
+
+    // Тема та тіло повідомлення
     $subject = 'Новий коментар на вашому сайті';
-    $to = "shumjachi@gmail.com";
-    /*$message = sprintf(
-        "Користувач: %s\nСайт: %s\nКоментар: %s\n\nПерейти до коментаря: %s",
-        $comment->comment_author,
-        $comment->comment_author_url,
-        $comment->comment_content,
-        get_permalink($post)
-    );*/
+    $mailer->Subject = $subject;
 
     $body = '<html>
-        <head>
-          <title>Order with master5.kiev.ua</title>
-        </head>
-        <body>';
-
-    $body .= 'Hello';
-
+                <head>
+                  <title>' . esc_html($subject) . '</title>
+                </head>
+                <body>';
+    $body .= 'Користувач: ' . esc_html($comment->comment_author) . '<br>';
+    $body .= 'Сайт: ' . esc_html($comment->comment_author_url) . '<br>';
+    $body .= 'Коментар: ' . esc_html($comment->comment_content) . '<br>';
+    $body .= 'Перейти до коментаря: <a href="' . esc_url(get_permalink($post)) . '">' . esc_url(get_permalink($post)) . '</a>';
     $body .= '</body></html>';
 
-    $headers[] = 'MIME-Version: 1.0';
-    $headers[] = 'Content-type: text/html; charset=iso-8859-1';
+    $mailer->Body    = $body;
+    $mailer->isHTML(true); // Встановлюємо формат на HTML
 
-    wp_mail($to, $subject, $message, $headers);
+    // Відправка листа
+    if (!$mailer->send()) {
+        error_log('Помилка при відправленні листа: ' . $mailer->ErrorInfo);
+    } else {
+        // Лист успішно відправлено (опційно можна вивести повідомлення)
+        // echo 'Лист успішно відправлено!';
+    }
 }
 
 add_action('comment_post', 'send_comment_email', 11, 2);
