@@ -254,7 +254,7 @@ if ( function_exists('yoast_breadcrumb') ) {
 | SEND COMMENT TO EMAIL
 |--------------------------------------------------------------------------
 */
-function send_comment_email($comment_id, PHPMailer $mailer) {
+function send_comment_email($comment_id) {
     $comment = get_comment($comment_id);
     $post = get_post($comment->comment_post_ID);
 
