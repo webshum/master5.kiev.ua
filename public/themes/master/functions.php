@@ -1,5 +1,7 @@
 <?php
 
+require dirname(dirname(ABSPATH)) . '/vendor/autoload.php';
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 
