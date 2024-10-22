@@ -259,10 +259,18 @@ function send_comment_email($comment_id) {
     $post = get_post($comment->comment_post_ID);
 
     // $to = "info@master5.kiev.ua";
-    
+    $subject = 'Новий коментар на вашому сайті';
+    $to = "webshumweb@gmail.com";
+    $message = sprintf(
+        "Користувач: %s\nСайт: %s\nКоментар: %s\n\nПерейти до коментаря: %s",
+        $comment->comment_author,
+        $comment->comment_author_url,
+        $comment->comment_content,
+        get_permalink($post)
+    );
 
     $to = 'webshumweb@gmail.com';
-    $subject = 'Новий коментар на вашому сайті';
+    $subject = 'Новий коментар';
     $body = '<html>
         <head>
           <title>New comment master5.kiev.ua</title>
@@ -270,7 +278,8 @@ function send_comment_email($comment_id) {
         <body>';
 
     $body .= "Користувач: {$comment->comment_author}<br>";
-    $body .= "Сайт: {$comment->comment_content}<br>";
+    $body .= "Email: {$comment->comment_email}<br>";
+    $body .= "Сайт: {$comment->comment_author_url}<br>";
     $body .= "Коментар: {$comment->comment_content}<br>";
     $body .= "Перейти до коментаря: " . get_permalink($post);
 
@@ -281,7 +290,7 @@ function send_comment_email($comment_id) {
         'Content-Type' => 'text/html; charset=UTF-8'
     );
 
-    mail($to, $subject, $message, $headers);
+    mail($to, $subject, $body, $headers);
 }
 
 add_action('comment_post', 'send_comment_email', 11, 2);
