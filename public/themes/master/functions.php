@@ -235,8 +235,11 @@ function send_form() {
 
     $body .= '</body></html>';
     
-    $headers[] = 'MIME-Version: 1.0';
-    $headers[] = 'Content-type: text/html; charset=iso-8859-1';
+    $headers = [
+        'From' => 'info@master5.kiev.ua',
+        'Reply-To' => 'info@master5.kiev.ua',
+        'Content-Type' => 'text/html; charset=UTF-8'
+    ];
     
     // $result = mail($to, $subject, $body, implode("\r\n", $headers));
      
@@ -273,11 +276,11 @@ function send_comment_email($comment_id) {
     $body .= "Перейти до коментаря: " . get_permalink($post);
 
     $body .= '</body></html>';
-    $headers = array(
+    $headers = [
         'From' => 'info@master5.kiev.ua',
         'Reply-To' => 'info@master5.kiev.ua',
         'Content-Type' => 'text/html; charset=UTF-8'
-    );
+    ];
 
     mail($to, $subject, $body, $headers);
 }
