@@ -210,9 +210,7 @@ function send_form() {
 
     // $to = get_option('admin_email');
     $to = "info@master5.kiev.ua";
-    $to = "webshumweb@gmail.com";
     $subject = 'Повідомлення з master5.kiev.ua';
-
 
     $body = '<html>
         <head>
