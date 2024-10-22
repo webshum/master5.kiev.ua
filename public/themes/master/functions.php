@@ -210,6 +210,7 @@ function send_form() {
 
     // $to = get_option('admin_email');
     $to = "info@master5.kiev.ua";
+    $to = "webshumweb@gmail.com";
     $subject = 'Повідомлення з master5.kiev.ua';
 
 
@@ -258,12 +259,8 @@ function send_comment_email($comment_id) {
     $comment = get_comment($comment_id);
     $post = get_post($comment->comment_post_ID);
 
-    // $to = "info@master5.kiev.ua";
+    $to = 'info@master5.kiev.ua';
     $subject = 'Новий коментар на вашому сайті';
-    $to = "webshumweb@gmail.com";
-
-    $to = 'webshumweb@gmail.com';
-    $subject = 'Новий коментар';
     $body = '<html>
         <head>
           <title>New comment master5.kiev.ua</title>
