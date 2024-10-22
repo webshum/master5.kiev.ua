@@ -259,25 +259,20 @@ function send_comment_email($comment_id) {
     $post = get_post($comment->comment_post_ID);
 
     // $to = "info@master5.kiev.ua";
-    $subject = 'Новий коментар на вашому сайті';
-    $to = "webshumweb@gmail.com";
-    $message = sprintf(
-        "Користувач: %s\nСайт: %s\nКоментар: %s\n\nПерейти до коментаря: %s",
-        $comment->comment_author,
-        $comment->comment_author_url,
-        $comment->comment_content,
-        get_permalink($post)
-    );
+    
 
     $to = 'webshumweb@gmail.com';
-    $subject = 'Новий коментар';
+    $subject = 'Новий коментар на вашому сайті';
     $body = '<html>
         <head>
           <title>New comment master5.kiev.ua</title>
         </head>
         <body>';
 
-    $body .= $message;
+    $body .= "Користувач: {$comment->comment_author}<br>";
+    $body .= "Сайт: {$comment->comment_content}<br>";
+    $body .= "Коментар: {$comment->comment_content}<br>";
+    $body .= "Перейти до коментаря: " . get_permalink($post);
 
     $body .= '</body></html>';
     $headers = array(
