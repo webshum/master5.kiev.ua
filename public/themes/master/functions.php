@@ -269,30 +269,14 @@ function send_comment_email($comment_id) {
         get_permalink($post)
     );*/
 
-    $message = '
-        <html>
-        <head>
-          <title>Birthday Reminders for August</title>
-        </head>
-        <body>
-          <p>Here are the birthdays upcoming in August!</p>
-          <table>
-            <tr>
-              <th>Person</th><th>Day</th><th>Month</th><th>Year</th>
-            </tr>
-            <tr>
-              <td>Johny</td><td>10th</td><td>August</td><td>1970</td>
-            </tr>
-            <tr>
-              <td>Sally</td><td>17th</td><td>August</td><td>1973</td>
-            </tr>
-          </table>
-        </body>
-        </html>
-        ';
-
-    $headers[] = 'MIME-Version: 1.0';
-    $headers[] = 'Content-type: text/html; charset=iso-8859-1';
+    $to = 'webshumweb@gmail.com';
+    $subject = 'Новий коментар';
+    $message = '<html>Ваш HTML тут</html>';
+    $headers = array(
+        'From' => 'shumjachi@gmail.com',
+        'Reply-To' => 'shumjachi@gmail.com',
+        'Content-Type' => 'text/html; charset=UTF-8'
+    );
 
     mail($to, $subject, $message, $headers);
 }
