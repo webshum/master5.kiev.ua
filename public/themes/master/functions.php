@@ -255,17 +255,12 @@ if ( function_exists('yoast_breadcrumb') ) {
 |--------------------------------------------------------------------------
 */
 function send_comment_email($comment_id) {
-    $subject = 'Новий коментар на вашому сайті';
-    $to = "webshumweb@gmail.com";
-    $body = "Hello";
-
-    wp_mail($to, $subject, $body);
-
     $comment = get_comment($comment_id);
     $post = get_post($comment->comment_post_ID);
 
     // $to = "info@master5.kiev.ua";
-    
+    $subject = 'Новий коментар на вашому сайті';
+    $to = "webshumweb@gmail.com";
     /*$message = sprintf(
         "Користувач: %s\nСайт: %s\nКоментар: %s\n\nПерейти до коментаря: %s",
         $comment->comment_author,
@@ -274,7 +269,20 @@ function send_comment_email($comment_id) {
         get_permalink($post)
     );*/
 
-    
+    $body = '<html>
+        <head>
+          <title>Order with master5.kiev.ua</title>
+        </head>
+        <body>';
+
+    $body .= 'Hello';
+
+    $body .= '</body></html>';
+
+    $headers[] = 'MIME-Version: 1.0';
+    $headers[] = 'Content-type: text/html; charset=iso-8859-1';
+
+    mail($to, $subject, $body, $headers);
 }
 
 add_action('comment_post', 'send_comment_email', 11, 2);
