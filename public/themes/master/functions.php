@@ -210,12 +210,12 @@ function send_form() {
 
     // $to = get_option('admin_email');
     $to = "info@master5.kiev.ua";
-    $subject = 'Order with master5.kiev.ua';
+    $subject = 'Повідомлення з master5.kiev.ua';
 
 
     $body = '<html>
         <head>
-          <title>Order with master5.kiev.ua</title>
+          <title>Повідомлення з master5.kiev.ua</title>
         </head>
         <body>';
 
@@ -239,7 +239,7 @@ function send_form() {
     
     // $result = mail($to, $subject, $body, implode("\r\n", $headers));
      
-    wp_mail( $to, $subject, $body, $headers );
+    mail( $to, $subject, $body, $headers );
     
     echo 'Done!';
     wp_die();
