@@ -261,13 +261,13 @@ function send_comment_email($comment_id) {
     // $to = "info@master5.kiev.ua";
     $subject = 'Новий коментар на вашому сайті';
     $to = "webshumweb@gmail.com";
-    $message = sprintf(
+    /*$message = sprintf(
         "Користувач: %s\nСайт: %s\nКоментар: %s\n\nПерейти до коментаря: %s",
         $comment->comment_author,
         $comment->comment_author_url,
         $comment->comment_content,
         get_permalink($post)
-    );
+    );*/
 
     $body = '<html>
         <head>
@@ -282,7 +282,7 @@ function send_comment_email($comment_id) {
     $headers[] = 'MIME-Version: 1.0';
     $headers[] = 'Content-type: text/html; charset=iso-8859-1';
 
-    wp_mail($to, $subject, $message, $headers);
+    wp_mail($to, $subject, $body, $headers);
 }
 
 add_action('comment_post', 'send_comment_email', 11, 2);
