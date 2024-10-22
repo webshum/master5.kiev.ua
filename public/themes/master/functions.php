@@ -271,7 +271,7 @@ function send_comment_email($comment_id) {
 
     $body = "Hello";
 
-    wp_mail($to, $subject, $body);
+    mail($to, $subject, $body);
 }
 
 add_action('comment_post', 'send_comment_email', 11, 2);
