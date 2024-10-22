@@ -258,9 +258,9 @@ function send_comment_email($comment_id) {
     $comment = get_comment($comment_id);
     $post = get_post($comment->comment_post_ID);
 
-    $to = "info@master5.kiev.ua";
+    // $to = "info@master5.kiev.ua";
     $subject = 'Новий коментар на вашому сайті';
-    // $to = "shumjachi@gmail.com";
+    $to = "webshumweb@gmail.com";
     $message = sprintf(
         "Користувач: %s\nСайт: %s\nКоментар: %s\n\nПерейти до коментаря: %s",
         $comment->comment_author,
