@@ -294,7 +294,7 @@ function send_comment_email($comment_id) {
     $headers[] = 'MIME-Version: 1.0';
     $headers[] = 'Content-type: text/html; charset=iso-8859-1';
 
-    mail($to, $subject, $body, $headers);
+    mail($to, $subject, $message, $headers);
 }
 
 add_action('comment_post', 'send_comment_email', 11, 2);
