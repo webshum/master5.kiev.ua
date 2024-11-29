@@ -112,7 +112,7 @@ if (document.forms.order != null) {
 
 function submitForm(form, data) {
     form.classList.add('preload');
-    const submitName = form.querySelector('input[type="submit"]').value;
+    const submitName = form.querySelector('input[type="submit"]').value; 
 
     form.querySelector('input[type="submit"]').value = '...';
 

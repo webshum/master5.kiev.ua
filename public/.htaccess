@@ -22,3 +22,23 @@ RewriteRule . /index.php [L]
 
 # END WordPress
 
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# Redirect specific pages to the homepage
+RewriteRule ^usly/noihn0002167121\.html$ / [R=301,L]
+RewriteRule ^xmlrpc\.php$ / [R=301,L]
+RewriteRule ^968043144214273\.html$ / [R=301,L]
+RewriteRule ^uk/author/master/$ / [R=301,L]
+RewriteRule ^wp-content/uploads/2023/08/uslugi-santekhnika\.webp$ / [R=301,L]
+RewriteRule ^cena/$ / [R=301,L]
+RewriteRule ^tafish/bradh0004068739\.html$ / [R=301,L]
+RewriteRule ^item/00679157507\.html$ / [R=301,L]
+RewriteRule ^riraig/drice0003137474\.html$ / [R=301,L]
+RewriteRule ^144090144214027\.html$ / [R=301,L]
+RewriteRule ^wp-admin/admin-ajax\.php\?action=rest-nonce$ / [R=301,L]
+RewriteRule ^ruansh/unen0002275947\.html$ / [R=301,L]
+RewriteRule ^aburer/wagge0001705822\.html$ / [R=301,L]
+</IfModule>
+
+
