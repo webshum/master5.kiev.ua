@@ -110,6 +110,52 @@ if (document.forms.order != null) {
     });
 }
 
+/* ACCORDEON
+------------------------------------ */
+function accordeon() {
+    let accordeon = document.querySelectorAll('.accordeon');
+    let flag = true;
+
+    if (accordeon != null) {
+        for (let i = 0; i < accordeon.length; i++) {
+            const item = accordeon[i].querySelectorAll('.item-accordeon');
+
+            for (let j = 0; j < item.length; j++) {
+                let btn = item[j].querySelector('.btn-accordeon');
+                
+                btn.addEventListener('click', openAccordeon);
+
+                if (item[j].classList.contains('active')) {
+                    let content = item[j].querySelector('.content-accordeon');
+                    let inner = item[j].querySelector('.inner-accordeon');
+                    content.style.height = (inner.clientHeight + 2) + 'px';
+                }
+            }
+        }
+    }
+
+    function openAccordeon(e) {
+        let item = this.closest('.accordeon').querySelectorAll('.item-accordeon');
+        let inner = this.parentNode.querySelector('.inner-accordeon');
+        let content = this.parentNode.querySelector('.content-accordeon');  
+
+        if (this.parentNode.classList.contains('active')) {            
+            this.parentNode.classList.remove('active');
+            content.removeAttribute('style');
+        } else {    
+            for (let i = 0; i < item.length; i++) {
+                item[i].classList.remove('active');
+                item[i].querySelector('.content-accordeon').removeAttribute('style');
+            }
+
+            this.parentNode.classList.add('active');
+            content.style.height = (inner.clientHeight + 2) + 'px';
+        }    
+    }
+}
+
+accordeon();
+
 function submitForm(form, data) {
     form.classList.add('preload');
     const submitName = form.querySelector('input[type="submit"]').value; 

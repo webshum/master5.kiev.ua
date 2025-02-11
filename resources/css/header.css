@@ -3,7 +3,7 @@
 #header {
     position: relative;
     border-bottom: 1px solid #ededed;
-    background: #fff;
+    background: #efe9e4;
 
     .center {
         padding-left: 0;
@@ -55,7 +55,7 @@
         padding-top: 20px;
     }
     .head-main {
-        background: #fff;
+        background: #efe9e4;
         transition: all 0.3s;
 
         & > .center {
@@ -81,7 +81,8 @@
     top: 8px;
     right: 0;
     font-size: 11px;
-    color: #888;
+    font-weight: bold;
+    color: var(--c-akcent);
 }
 
 .slogan {

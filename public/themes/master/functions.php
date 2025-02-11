@@ -110,6 +110,17 @@ add_filter('wp_mail_from_name', fn() => env('MAIL_FROM_NAME', 'Example'));
 
 /*
 |--------------------------------------------------------------------------
+| ALLOW UPLOAD SVG
+|--------------------------------------------------------------------------
+*/
+function allow_svg_upload($mimes) {
+    $mimes['svg'] = 'image/svg+xml';
+    return $mimes;
+}
+add_filter('upload_mimes', 'allow_svg_upload');
+
+/*
+|--------------------------------------------------------------------------
 | Check to array empty
 |--------------------------------------------------------------------------
 */
