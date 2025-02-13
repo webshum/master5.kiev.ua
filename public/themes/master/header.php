@@ -11,6 +11,23 @@
     <link rel="apple-touch-icon" href="https://master5.kiev.ua/uploads/2024/08/cropped-favicon-180x180.png" />
     <meta name="msapplication-TileImage" content="https://master5.kiev.ua/uploads/2024/08/cropped-favicon-270x270.png" />
 
+    <?php if (is_front_page() || is_home()) : ?>
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Головна",
+                    "item": "https://master5.kiev.ua/"
+                }
+            ]
+        }
+        </script>
+    <?php endif; ?>
+
     <?php wp_head(); ?>
 </head>
 
