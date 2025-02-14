@@ -28,6 +28,7 @@
                     'prev_text' => '&laquo;',
                     'next_text' => '&raquo;',
                     'mid_size' => 2,
+                    'screen_reader_text' => ' ',
                 ));
                 ?>
             </div>
