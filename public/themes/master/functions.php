@@ -37,6 +37,9 @@ pll_register_string( 'tel', 'Tel', 'WordPress' );
 pll_register_string( 'name', 'Name', 'WordPress' );
 pll_register_string( 'submit', 'Submit', 'WordPress' );
 pll_register_string( 'form_success', 'FormSuccess', 'WordPress' );
+pll_register_string( 'captcha', 'Incorrect value', 'WordPress' );
+pll_register_string( 'captcha', 'Enter a number', 'WordPress' );
+pll_register_string( 'captcha', 'How many', 'WordPress' );
 
 // Open comments
 add_filter( 'comments_open', function($open, $post_id) {

@@ -85,6 +85,21 @@
         width: 100%;
         order: 3;
     }
+
+    input[type="submit"] {display: none;}
+}
+
+#comment-form-captcha {
+    max-width: 600px;
+    margin: 0 auto;
+
+    .error {
+        margin-top: 5px;
+        color: red;
+        display: inline-flex;
+    }
+
+    input[type="submit"] {margin-top: 15px !important;}
 }
 
 @media (max-width: 500px) {

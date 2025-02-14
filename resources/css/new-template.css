@@ -312,7 +312,7 @@
 				right: 0;
 				left: 0;
 				bottom: 0;
-				background: linear-gradient(0, rgba(1,103,4,.7), transparent);
+				background: linear-gradient(0, rgba(1,103,4,.5), transparent);
 				pointer-events: none;
 				border-radius: 15px;
 			}

@@ -48,8 +48,8 @@ if ( post_password_required() ) {
     $args = [
         'fields' => apply_filters( 'comment_form_default_fields', $fields ),
         'comment_field' => '<p class="comment-form-comment"><label for="comment">' . pll__('Comment') . '</label><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea></p>',
-        'must_log_in' => '<p class="must-log-in">' . pll__('You must be logged in to post a comment.'), wp_login_url( apply_filters( 'the_permalink', get_permalink() ) ) . '</p>',
-        'logged_in_as' => '<p class="logged-in-as">' . pll__('Logged in as. Log out?'), admin_url( 'profile.php' ), $user_identity, wp_logout_url( apply_filters( 'the_permalink', get_permalink() ) ) . '</p>',
+        'must_log_in' => '<p class="must-log-in">' . pll__('You must be logged in to post a comment.') . wp_login_url( apply_filters( 'the_permalink', get_permalink() ) ) . '</p>',
+        'logged_in_as' => '<p class="logged-in-as">' . pll__('Logged in as') . ' ' . $user_identity . '. <a href="' . wp_logout_url( apply_filters( 'the_permalink', get_permalink() ) ) . '">' . pll__('Log out?') . '</a></p>',
         'comment_notes_before' => '<p class="comment-notes">' . pll__('Required fields are marked *') . '</p>',
         'comment_notes_after' => '',
         'title_reply' => pll__('Leave a Reply'),
@@ -60,4 +60,34 @@ if ( post_password_required() ) {
 
     comment_form( $args );
     ?>
+    
+    <div id="comment-form-captcha">
+        <label for="captcha"><?php echo pll__('How many') ?> 4 + 13?</label>
+        <input type="text" placeholder="<?php echo pll__('Enter a number') ?>">
+        <p class="error" style="display: none;"><?php echo pll__('Incorrect value') ?></p>
+        <input type="submit" id="submit-comment btn" value="<?php echo pll__('Post Comment') ?>">
+    </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const comment = document.querySelector('form.comment-form');
+        const commentFormCaptcha = document.getElementById('comment-form-captcha');
+        const submit = commentFormCaptcha.querySelector('input[type="submit"]');
+        const text = commentFormCaptcha.querySelector('input[type="text"]');
+        const error = commentFormCaptcha.querySelector('.error');
+
+        submit.addEventListener('click', e => {
+            e.preventDefault();  
+
+            if (Number(text.value) === 17) {  
+                console.log(comment);
+                comment.requestSubmit();  
+            } else {
+                error.removeAttribute('style');  
+                return false;
+            }
+        });
+    });
+</script>
+

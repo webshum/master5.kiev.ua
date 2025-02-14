@@ -21,6 +21,18 @@
                     <div><?= wp_trim_words(get_the_excerpt(), 40); ?></div>
                 </a>
             <?php endwhile; ?>
+
+            <div class="pagination">
+                <?php
+                the_posts_pagination(array(
+                    'prev_text' => '&laquo;',
+                    'next_text' => '&raquo;',
+                    'mid_size' => 2,
+                    'screen_reader_text' => 'Search navigation',
+                ));
+                ?>
+            </div>
+            
         <?php endif; ?>
 
     </div>
