@@ -56,6 +56,7 @@ if ( post_password_required() ) {
         'title_reply_to' => pll__('Leave a Reply to'),
         'cancel_reply_link' => pll__('Cancel Reply'),
         'label_submit' => pll__('Post Comment'),
+        'submit_button' => '', // Приховуємо стандартну кнопку
     ];
 
     comment_form( $args );
@@ -63,29 +64,28 @@ if ( post_password_required() ) {
     
     <div id="comment-form-captcha">
         <label for="captcha"><?php echo pll__('How many') ?> 4 + 13?</label>
-        <input type="text" placeholder="<?php echo pll__('Enter a number') ?>">
+        <input type="text" id="captcha-input" placeholder="<?php echo pll__('Enter a number') ?>">
         <p class="error" style="display: none;"><?php echo pll__('Incorrect value') ?></p>
-        <input type="submit" id="submit-comment btn" value="<?php echo pll__('Post Comment') ?>">
+        <input type="submit" id="custom-submit" value="<?php echo pll__('Post Comment') ?>">
     </div>
 </div>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        const comment = document.querySelector('form.comment-form');
-        const commentFormCaptcha = document.getElementById('comment-form-captcha');
-        const submit = commentFormCaptcha.querySelector('input[type="submit"]');
-        const text = commentFormCaptcha.querySelector('input[type="text"]');
-        const error = commentFormCaptcha.querySelector('.error');
+        const commentForm = document.querySelector('form.comment-form');
+        const captchaBlock = document.getElementById('comment-form-captcha');
+        const submitButton = document.getElementById('custom-submit');
+        const captchaInput = document.getElementById('captcha-input');
+        const errorMessage = captchaBlock.querySelector('.error');
 
-        submit.addEventListener('click', e => {
-            e.preventDefault();  
+        submitButton.addEventListener('click', function (e) {
+            e.preventDefault();
 
-            if (Number(text.value) === 17) {  
-                console.log(comment);
-                comment.requestSubmit();  
+            if (Number(captchaInput.value) === 17) {
+                errorMessage.style.display = 'none';
+                commentForm.submit();
             } else {
-                error.removeAttribute('style');  
-                return false;
+                errorMessage.style.display = 'block';
             }
         });
     });

@@ -297,23 +297,13 @@
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr 1fr;
 		gap: 30px 30px;
+		margin-bottom: 30px;
+	    padding-bottom: 30px;
+	    border-bottom: 1px solid #cccccc;
 
 		& > div {
 			iframe {
 				width: 100%;
-				border-radius: 15px;
-			}
-
-			p:first-child:after {
-				content: '';
-				display: block;
-				position: absolute;
-				top: 0;
-				right: 0;
-				left: 0;
-				bottom: 0;
-				background: linear-gradient(0, rgba(1,103,4,.5), transparent);
-				pointer-events: none;
 				border-radius: 15px;
 			}
 
