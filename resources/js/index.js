@@ -1,4 +1,5 @@
 import '../css/index.css';
+import fa from "fontawesome";
 
 document.querySelectorAll('[data-lazy-src]').forEach(img => {
     img.src = img.dataset.lazySrc;
