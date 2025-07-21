@@ -1,4 +1,11 @@
-<?php get_header(); ?>
+<?php 
+if (function_exists('is_woocommerce_shop_area') && is_woocommerce_shop_area()) {
+    get_header('shop');
+} else {
+    get_header();
+}
+
+?>
 
 <main class="main-page">
     <div class="center">
@@ -6,11 +13,21 @@
         <?php the_content(); ?>
 
         <?php
-            if ( (comments_open() || get_comments_number()) && empty(get_field('onoff_comments')) ) {
-                comments_template();
+            if (!is_page('order-received')) {
+                if ( (comments_open() || get_comments_number()) && empty(get_field('onoff_comments')) ) {
+                    comments_template();
+                }
             }
         ?>
     </div>
 </main>
 
-<?php get_footer(); ?>
+<?php
+
+if (function_exists('is_woocommerce_shop_area') && is_woocommerce_shop_area()) {
+    get_footer('shop');
+} else {
+    get_footer();
+}
+
+?>

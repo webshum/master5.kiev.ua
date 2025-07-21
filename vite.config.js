@@ -2,10 +2,12 @@ import dotenv from 'dotenv';
 import { defineConfig } from 'vite';
 import tailwindcss from 'tailwindcss';
 import autoprefixer from 'autoprefixer';
+import vue from '@vitejs/plugin-vue';
 
 dotenv.config();
 
 export default defineConfig({
+  root: '.',
   publicDir: 'resources/static',
   build: {
     assetsDir: '',
@@ -17,6 +19,7 @@ export default defineConfig({
     },
   },
   plugins: [
+    vue(),
     {
       name: 'php',
       handleHotUpdate({ file, server }) {

@@ -70,3 +70,62 @@
         opacity: 1;
     }
 }
+
+.footer-shop {
+    .footer-main {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #8db88f;
+
+        @media (max-width: 767px) {
+            flex-direction: column;
+            align-items: center;
+            gap: 15px 0;
+        }
+    }
+
+    .footer-col {
+        ul {
+            display: flex;
+            gap: 0 15px;
+            a {
+                font-weight: bold;
+            }
+        }
+
+        @media (max-width: 550px) {
+            ul {flex-direction: column;}
+        }
+    }
+
+    address {
+        font-style: normal;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            color: var(--c-akcent);
+
+            @media (max-width: 500px) {
+                span {display: none;}
+            }
+        }
+
+        svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--c-akcent);
+            transition: all 0.3s;
+        }
+
+        a:hover {color: #000;}
+        a:hover svg {fill: #000;}
+    }
+}

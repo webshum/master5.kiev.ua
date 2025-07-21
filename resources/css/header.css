@@ -169,11 +169,13 @@
 }
 
 .discount {
-    background: #c4d9c8;
+    background: #fff218;
     color: #454545;
     text-align: center;
     padding: 5px 0;
     font-size: 12px;
+    font-weight: bold;
+    border-bottom: 1px solid #d5d3d3;
 
     .center {
         display: flex;
@@ -206,7 +208,7 @@
         width: 30px;
         height: 21px;
         position: relative;
-        z-index: 991;
+        z-index: 9991;
         cursor: pointer;
 
         span {
@@ -237,7 +239,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        z-index: 99;
+        z-index: 999;
         background: #ffffff;
         display: flex;
         align-items: center;

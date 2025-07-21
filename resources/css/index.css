@@ -9,6 +9,9 @@
 @import "blog";
 @import "template";
 @import "new-template";
+@import "product";
+@import "product-single";
+@import "archive-products";
 
 * {outline: none;}
 
@@ -228,6 +231,7 @@ input[type="submit"] {
     min-height: 100vh;
     overflow-x: hidden;
 }
+.page-template-page-shop .wrapper {overflow-x: visible;}
 
 main {flex: 1;}
 

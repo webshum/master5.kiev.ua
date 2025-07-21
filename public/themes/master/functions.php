@@ -1,5 +1,9 @@
 <?php
 
+if (!env('WP_DEBUG')) {
+    @ini_set('display_errors', 0);
+}
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 
@@ -13,6 +17,8 @@ add_action('after_setup_theme', function () {
 
     register_nav_menus([
         'navigation' => __('Navigation'),
+        'navigation_shop' => __('Navigation Shop'),
+        'navigation_footer_shop' => __('Navigation Footer Shop'),
     ]);
 });
 
@@ -40,6 +46,8 @@ pll_register_string( 'form_success', 'FormSuccess', 'WordPress' );
 pll_register_string( 'captcha', 'Incorrect value', 'WordPress' );
 pll_register_string( 'captcha', 'Enter a number', 'WordPress' );
 pll_register_string( 'captcha', 'How many', 'WordPress' );
+pll_register_string( 'buy', 'Buy', 'WordPress' );
+pll_register_string( 'related_products', 'Related products', 'WordPress' );
 
 // Open comments
 add_filter( 'comments_open', function($open, $post_id) {
@@ -110,6 +118,22 @@ add_action('phpmailer_init', function (PHPMailer $mailer) {
 
 add_filter('wp_mail_from', fn() => env('MAIL_FROM_ADDRESS', 'hello@example.com'));
 add_filter('wp_mail_from_name', fn() => env('MAIL_FROM_NAME', 'Example'));
+
+add_action('init', function () {
+    if (isset($_GET['testmail'])) {
+        $sent = wp_mail('shumjachi@email.com', 'Test', 'Це тестовий лист');
+
+        if (!$sent) {
+            global $phpmailer;
+            if (is_object($phpmailer)) {
+                var_dump($phpmailer->ErrorInfo);
+            }
+        }
+
+        var_dump($sent);
+        die;
+    }
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -207,6 +231,7 @@ function send_form() {
     $slug = '';
     $link = '';
     $title = '';
+    $productID = false;
 
     if (!empty($_POST['first_name'])) $first_name = $_POST['first_name'];
     if (!empty($_POST['last_name'])) $last_name = $_POST['last_name'];
@@ -221,8 +246,9 @@ function send_form() {
     if (!empty($_POST['slug'])) $slug = $_POST['slug'];
     if (!empty($_POST['link'])) $link = $_POST['link'];
     if (!empty($_POST['title'])) $title = $_POST['title'];
+    if (!empty($_POST['productID'])) $productID = $_POST['productID'];
 
-    // $to = get_option('admin_email');
+    // $to = "shumjachi@gmail.com";
     $to = "info@master5.kiev.ua";
     $subject = 'Повідомлення з master5.kiev.ua';
 
@@ -244,18 +270,17 @@ function send_form() {
     if (!empty($slug)) $body .= 'Сторіка: ' . $slug . '<br>';
     if (!empty($link)) $body .= 'Посилання: ' . $link . '<br>';
     if (!empty($title)) $body .= 'Заголовок: ' . $title . '<br>';
-
+    $body .= "id: > $productID";
     $body .= '</body></html>';
     
     $headers = [
         'From' => 'info@master5.kiev.ua',
         'Reply-To' => 'info@master5.kiev.ua',
-        'Content-Type' => 'text/html; charset=UTF-8'
+        'Content-Type: text/html; charset=UTF-8',
     ];
     
-    // $result = mail($to, $subject, $body, implode("\r\n", $headers));
-     
-    mail( $to, $subject, $body, $headers );
+    $success = wp_mail($to, $subject, $body, $headers);
+    // mail( $to, $subject, $body, $headers );
     
     echo 'Done!';
     wp_die();
@@ -298,4 +323,261 @@ function send_comment_email($comment_id) {
 }
 
 add_action('comment_post', 'send_comment_email', 11, 2);
+
+/*
+|--------------------------------------------------------------------------
+| REMOVE TABS
+|--------------------------------------------------------------------------
+*/
+add_filter('woocommerce_product_tabs', 'remove_woocommerce_product_tabs', 98);
+function remove_woocommerce_product_tabs($tabs) {
+    unset($tabs['description']);       
+    unset($tabs['additional_information']); 
+    unset($tabs['reviews']);            
+    return $tabs;
+}
+
+remove_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10);
+
+function is_template_name( string $template_name ): bool {
+    if ( ! is_page() && ! is_singular() ) {
+        return false;
+    }
+
+    $template_file = get_page_template_slug( get_queried_object_id() );
+
+    if ( ! $template_file ) {
+        return false;
+    }
+
+    $template_path = locate_template( $template_file );
+
+    if ( ! $template_path ) {
+        return false;
+    }
+
+    $template_data = get_file_data( $template_path, array(
+        'Template Name' => 'Template Name',
+    ));
+
+    if ( empty($template_data['Template Name']) ) {
+        return false;
+    }
+
+    return ( strtolower(trim($template_data['Template Name'])) === strtolower(trim($template_name)) );
+}
+
+function is_woocommerce_shop_area() {
+    return is_shop() || is_product_category() || is_product_tag() || is_product();
+}
+
+/*
+|--------------------------------------------------------------------------
+| API NOVA POST
+|--------------------------------------------------------------------------
+*/
+add_action('rest_api_init', function () {
+    register_rest_route('np/v1', '/regions', [
+        'methods' => 'GET',
+        'callback' => 'get_nova_poshta_regions',
+        'permission_callback' => '__return_true',
+    ]);
+
+    register_rest_route('np/v1', '/cities', [
+        'methods' => 'GET',
+        'callback' => 'get_nova_poshta_cities',
+        'permission_callback' => '__return_true',
+        'args' => [
+            'region_ref' => ['required' => true]
+        ]
+    ]);
+
+    register_rest_route('np/v1', '/warehouses', [
+        'methods' => 'GET',
+        'callback' => 'get_nova_poshta_warehouses',
+        'permission_callback' => '__return_true',
+        'args' => [
+            'city_ref' => ['required' => true]
+        ]
+    ]);
+});
+
+function get_nova_poshta_regions() {
+    return nova_poshta_api_request('getAreas', new stdClass());
+}
+
+function get_nova_poshta_cities($request) {
+    $region_ref = $request->get_param('region_ref');
+    return nova_poshta_api_request('getCities', ['AreaRef' => $region_ref]);
+}
+
+function get_nova_poshta_warehouses($request) {
+    $city_ref = $request->get_param('city_ref');
+    return nova_poshta_api_request('getWarehouses', ['CityRef' => $city_ref]);
+}
+
+function nova_poshta_api_request($method, $params) {
+    $api_key = env('API_KEY_NP');
+
+    $payload = [
+        'apiKey' => $api_key,
+        'modelName' => 'Address',
+        'calledMethod' => $method,
+        'methodProperties' => $params
+    ];
+
+    $response = wp_remote_post('https://api.novaposhta.ua/v2.0/json/', [
+        'body' => json_encode($payload),
+        'headers' => ['Content-Type' => 'application/json'],
+        'timeout' => 10,
+    ]);
+
+    $raw = wp_remote_retrieve_body($response);
+    $data = json_decode($raw);
+    return $data->data;
+}
+
+/*
+|--------------------------------------------------------------------------
+| API ORDER
+|--------------------------------------------------------------------------
+*/
+add_action('rest_api_init', function () {
+    register_rest_route('myshop/v1', '/submit-order', [
+        'methods'  => 'POST',
+        'callback' => 'handle_vue_order',
+        'permission_callback' => '__return_true'
+    ]);
+});
+
+function handle_vue_order(WP_REST_Request $request) {
+    $data = $request->get_json_params();
+    $productID = absint($data['productId']);
+
+    if (!empty($productID)) {
+        $order = wc_create_order();
+        $order->add_product(wc_get_product($productID), 1);
+
+        $order->set_address([
+            'first_name' => sanitize_text_field($data['name']),
+            'phone'      => sanitize_text_field($data['phone']),
+            'email'      => 'no-reply@example.com',
+        ], 'billing');
+
+        $order->update_meta_data('np_region', sanitize_text_field($data['region']));
+        $order->update_meta_data('np_city', sanitize_text_field($data['city']));
+        $order->update_meta_data('np_warehouse', sanitize_text_field($data['warehouse']));
+
+        $order->calculate_totals();
+        $order->update_status('processing');
+
+        $order->save();
+
+        WC()->mailer()->emails['WC_Email_New_Order']->trigger($order);
+
+        return new WP_REST_Response([
+            'status' => 'success',
+            'order_id' => $order->get_id(),
+            'order_key' => $order->get_order_key(),
+            'redirect_url' => "/order-received/{$order->get_id()}/?key={$order->get_order_key()}&utm_nooverride=1",
+            'data' => $data
+        ]);
+    }
+
+    return new WP_REST_Response(['status' => 'error', 'message' => 'No product ID'], 400);
+}
+
+
+add_action('woocommerce_admin_order_data_after_billing_address', function($order){
+    echo '<p><strong>Регіон:</strong> ' . esc_html($order->get_meta('np_region')) . '</p>';
+    echo '<p><strong>Місто:</strong> ' . esc_html($order->get_meta('np_city')) . '</p>';
+    echo '<p><strong>Відділення:</strong> ' . esc_html($order->get_meta('np_warehouse')) . '</p>';
+});
+
+add_action('woocommerce_email_after_order_table', function($order, $sent_to_admin, $plain_text, $email){
+    $supported_ids = ['new_order', 'customer_processing_order', 'customer_completed_order'];
+
+    if (in_array($email->id, $supported_ids)) {
+        echo '<h2>Дані Нової Пошти</h2>';
+        echo '<p><strong>Регіон:</strong> ' . esc_html($order->get_meta('np_region')) . '</p>';
+        echo '<p><strong>Місто:</strong> ' . esc_html($order->get_meta('np_city')) . '</p>';
+        echo '<p><strong>Відділення:</strong> ' . esc_html($order->get_meta('np_warehouse')) . '</p>';
+    }
+}, 20, 4);
+
+/*
+|--------------------------------------------------------------------------
+| API ATTRIBUTES
+|--------------------------------------------------------------------------
+*/
+add_action('rest_api_init', function () {
+    register_rest_route('custom/v1', '/attribute-terms', [
+        'methods'  => 'GET',
+        'callback' => 'get_attribute_terms_by_language',
+        'permission_callback' => '__return_true'
+    ]);
+});
+
+function get_attribute_terms_by_language($request) {
+    $lang = $request->get_param('lang') ?: 'uk';
+
+    if (!function_exists('pll_get_term_language')) {
+        return new WP_Error('pll_missing', 'Polylang is not active', ['status' => 500]);
+    }
+
+    $attributes = wc_get_attribute_taxonomies();
+    $results = [];
+
+    foreach ($attributes as $attribute) {
+        $taxonomy = wc_attribute_taxonomy_name($attribute->attribute_name);
+
+        $terms = get_terms([
+            'taxonomy' => $taxonomy,
+            'hide_empty' => false,
+        ]);
+
+        $terms_data = [];
+
+        foreach ($terms as $term) {
+            $lang_key = 'lang_' . $lang;
+            $translated_name = get_term_meta($term->term_id, $lang_key, true);
+
+            if (!$translated_name) {
+                continue;
+            }
+
+            $terms_data[] = [
+                'id'   => $term->term_id,
+                'slug' => $term->slug,
+                'name' => $translated_name,
+            ];
+        }
+
+        if (empty($terms_data)) {
+            continue;
+        }
+
+        $label = wc_attribute_label($taxonomy);
+
+        $results[] = [
+            'id'    => $attribute->attribute_id,
+            'slug'  => $attribute->attribute_name,
+            'label' => $label,
+            'terms' => $terms_data,
+        ];
+    }
+
+    return rest_ensure_response($results);
+}
+
+add_action('init', function () {
+    if (
+        defined('REST_REQUEST') && REST_REQUEST &&
+        !empty($_GET['lang']) &&
+        function_exists('pll_set_current_language')
+    ) {
+        pll_set_current_language(sanitize_text_field($_GET['lang']));
+    }
+});
+
 

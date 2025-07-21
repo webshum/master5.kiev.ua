@@ -1,0 +1,269 @@
+.loading {
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	z-index: 9995;
+	background: rgba(255,255,255,.8);
+}
+
+#shop {
+	padding: 50px 0;
+	background: #fff;
+
+	.center {
+		display: grid;
+		grid-template-columns: 250px 1fr;
+		gap: 50px 50px;
+		align-items: start;
+	}
+
+	.btn-filters {
+		background: var(--c-akcent);
+		padding: 10px 30px;
+		max-width: 300px;
+		margin: 0 auto;
+		border-radius: 30px;
+		color: #fff;
+		font-weight: 600;
+		text-transform: uppercase;
+		position: sticky;
+		top: 120px;
+		cursor: pointer;
+		z-index: 998;
+		animation: shadow-pulse 3s infinite;
+		display: none;
+	}
+
+	@media (max-width: 1500px) {
+		.center {gap: 30px 30px;}
+	}
+
+	@media (max-width: 991px) {
+		.center {grid-template-columns: 1fr;}
+		.btn-filters {display: inline-flex;}
+	}
+}
+
+.filters {
+	.close-filters {
+		position: fixed;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		height: 40px;
+		background: var(--c-akcent);
+		color: #fff;
+		font-weight: 600;
+		font-size: 14px;
+		text-transform: uppercase;
+		max-width: 300px;
+		display: none;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+	}
+
+	.group-price {
+		display: flex;
+		align-items: center;
+		margin-bottom: 20px;
+		gap: 10px;
+
+		input {
+			width: 100%;
+		}
+
+		button {
+			font-weight: 500;
+			font-size: 18px;
+			text-transform: uppercase;
+			border-bottom: 1px solid var(--c-akcent);
+			color: var(--c-akcent);
+		}
+	}
+
+	.title {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		border-top: 1px solid #ccc;
+		padding: 15px 0;
+		cursor: pointer;
+		transition: all 0.3s;
+
+		h3 {
+			margin: 0;
+			color: #000;
+			font-weight: 500;
+			font-size: 15px;
+		}
+
+		svg {
+			fill: none;
+			stroke: #ccc;
+			width: 15px;
+			height: 10px;
+			transition: all 0.3s;
+		}
+
+		&:hover {opacity: 0.5;}
+	}
+
+	.label {
+		display: flex;
+		align-items: center;
+		gap: 0 10px;
+		padding: 5px 0;
+		font-size: 13px;
+		cursor: pointer;
+
+		input {display: none;}
+
+		.checkbox {
+			width: 20px;
+			height: 20px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			&:after {
+				content: '';
+				display: block;
+				width: 15px;
+				height: 15px;
+				border-radius: 3px;
+				background: var(--c-akcent);
+				transition: all 0.3s;
+				transform: scale(0);
+			}
+		}
+
+		input:checked + .checkbox:after {transform: scale(1);}
+	}
+
+	.inner {
+		display: none;
+		padding-bottom: 15px;
+		max-height: 250px;
+		overflow-y: auto;
+
+		scrollbar-color: #ccc transparent;
+		scrollbar-width: thin;
+	}
+
+	.group.active {
+		.title svg {transform: rotate(-180deg);}
+		.inner {display: block;}
+	} 
+
+	@media (max-width: 991px) {
+		position: fixed;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		z-index: 9992;
+		background: #fff;
+		padding: 50px 20px;
+		max-width: 300px;
+		box-shadow: 0 0 30px rgba(0,0,0,.2);
+		overflow-y: auto;
+		scrollbar-color: #ccc transparent;
+		scrollbar-width: thin;
+		display: none;
+
+		.close-filters {display: flex;}
+		&.open {display: block;}
+	}
+}
+
+.all-products {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 30px 30px;
+
+	.box-product {
+		border: 1px solid #ccc;
+		border-radius: 20px;
+		padding: 30px 20px;
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		transition: all 0.3s;
+
+		.image {
+			margin-bottom: 15px;
+			flex: 1;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		h2 {
+			font-size: 15px;
+			margin-top: auto;
+		}
+
+		.price {
+			font-size: 15px;
+			margin-bottom: 15px;
+			font-weight: bold;
+			color: #1dce25 !important;
+		}
+
+		.btn-green {
+			font-size: 14px;
+			padding: 10px 25px;
+		}
+	}
+
+	@media (max-width: 1500px) {
+		gap: 15px 15px;
+
+		.box-product {
+			padding: 20px;
+			h2, .price {font-size: 13px;}
+		}
+	}
+
+
+	@media (max-width: 768px) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	@media (max-width: 550px) {
+		grid-template-columns: 1fr;
+	}
+}
+
+.pagination {
+	padding-top: 30px;
+	display: flex;
+	justify-content: center;
+	ul {
+		display: flex;
+		align-items: center;
+		gap: 0 10px;
+
+		li {
+			&:before {display: none;}
+			padding: 0;
+		}
+		
+		a {
+			cursor: pointer;
+			font-weight: bold;
+		}
+
+		li.active {
+			a {
+				font-size: 20px;
+				color: var(--c-akcent);
+			}
+		}
+	}
+}

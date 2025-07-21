@@ -1,5 +1,42 @@
+import { createApp } from 'vue/dist/vue.esm-bundler';
+import Shop from './pages/Shop.vue';
+import Checkout from './components/Checkout.vue';
 import '../css/index.css';
+import '@splidejs/splide/css';
+import Splide from '@splidejs/splide';
 import fa from "fontawesome";
+import i18n from './language.js';
+
+if (document.querySelector('.related-splide') != null) {
+    document.querySelectorAll('.related-splide').forEach(slider => {
+        new Splide(slider, {
+            type: 'loop',
+            arrows: true,
+            gap: 30,
+            perPage: 4,
+            pagination: false,
+            autoplay: true,
+            breakpoints: {
+                1600: {
+                    gap: 15,
+                },
+                991: {
+                    type: 'loop',
+                    perPage: 2,
+                    padding: {right: '130px'},
+                },
+                550: {
+                    perPage: 1,
+                    padding: {right: '50px'},
+                },
+                450: {
+                    perPage: 1,
+                    padding: {right: '10px'},
+                }
+            }
+        }).mount();
+    });
+}
 
 document.querySelectorAll('[data-lazy-src]').forEach(img => {
     img.src = img.dataset.lazySrc;
@@ -74,6 +111,10 @@ function popup() {
 
             close.addEventListener('click', closePopup);
             overlay.addEventListener('click', closePopup);
+
+            if (this.getAttribute('data-productid')) {
+                popup.dataset.productId = this.dataset.productid;
+            }
         });
     }
 
@@ -103,13 +144,44 @@ if (document.forms.order != null) {
         const date = e.target.date ? e.target.date.value : '';
         const time = e.target.time ? e.target.time.value : '';
         const title = e.target.title ? e.target.title.value : '';
+        const productID = e.target.productID ? e.target.productID.value : '';
         const link = window.location.href;
         const slug = window.location.pathname;
-        const data = `first_name=${first_name}&last_name=${last_name}&phone=${phone}&email=${email}&date=${date}&time=${time}&title=${title}&slug=${slug}&link=${link}&action=send`;
+        const data = `first_name=${first_name}&last_name=${last_name}&phone=${phone}&email=${email}&date=${date}&time=${time}&title=${title}&slug=${slug}&link=${link}&productID=${productID}&action=send`;
         
         submitForm(e.target, data);
     });
 }
+
+/* FILTERS
+------------------------------------ */
+function filters() {
+    const filters = document.querySelector('.filters');
+    const title = filters.querySelectorAll('.title');
+    const btnFilters = document.querySelector('.btn-filters');
+    const closeFilters = document.querySelector('.close-filters');
+
+    title.forEach(btn => {
+        btn.addEventListener('click', e => {
+            btn.closest('.group').classList.toggle('active');
+        });
+    });
+
+    btnFilters.onclick = e => filters.classList.toggle('open');
+    closeFilters.onclick = e => filters.classList.remove('open');
+}
+
+const observer = new MutationObserver(() => {
+    if (document.querySelector('.filters') !== null) {
+        filters();
+        popup();
+    }
+});
+
+observer.observe(document.body, {
+    childList: true,
+    subtree: true
+});
 
 /* ACCORDEON
 ------------------------------------ */
@@ -181,3 +253,13 @@ function submitForm(form, data) {
         console.log('Network error!');
     }
 }
+
+const app = createApp({});
+app.component('shop', Shop);
+app.use(i18n);
+app.mount('#shop');
+
+const appPopup = createApp({});
+appPopup.component('checkout', Checkout);
+appPopup.use(i18n);
+appPopup.mount('#app-popup');

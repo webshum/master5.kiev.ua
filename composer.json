@@ -11,12 +11,13 @@
         "php": "^8.2",
         "composer/installers": "^2.2",
         "roots/bedrock-autoloader": "^1.0.4",
-        "roots/wordpress": "^6.4.3",
+        "roots/wordpress": "^6.8.1",
         "roots/wp-password-bcrypt": "^1.1",
         "symfony/http-foundation": "^7.0",
         "vinkla/headache": "^3.3",
         "vlucas/phpdotenv": "^5.6",
-        "wpackagist-plugin/clean-image-filenames": "^1.4"
+        "wpackagist-plugin/clean-image-filenames": "^1.4",
+        "koodimonni-language/core-uk": "*"
     },
     "require-dev": {
         "symfony/var-dumper": "^7.0"
@@ -28,6 +29,13 @@
             "only": [
                 "wpackagist-plugin/*",
                 "wpackagist-theme/*"
+            ]
+        },
+        {
+            "type": "composer",
+            "url": "https://wp-languages.github.io",
+            "only": [
+                "koodimonni-language/*"
             ]
         }
     ],
@@ -61,7 +69,12 @@
                 "type:wordpress-theme"
             ]
         },
-        "wordpress-install-dir": "public/wordpress"
+        "wordpress-install-dir": "public/wordpress",
+        "dropin-paths": {
+            "public/languages/": [
+                "vendor:koodimonni-language"
+            ]
+        }
     },
     "scripts": {
         "post-root-package-install": [
