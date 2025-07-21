@@ -570,14 +570,3 @@ function get_attribute_terms_by_language($request) {
     return rest_ensure_response($results);
 }
 
-add_action('init', function () {
-    if (
-        defined('REST_REQUEST') && REST_REQUEST &&
-        !empty($_GET['lang']) &&
-        function_exists('pll_set_current_language')
-    ) {
-        pll_set_current_language(sanitize_text_field($_GET['lang']));
-    }
-});
-
-
