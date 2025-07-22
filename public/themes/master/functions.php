@@ -23,31 +23,33 @@ add_action('after_setup_theme', function () {
 });
 
 // Polylang
-pll_register_string( 'search', 'Search', 'WordPress' );
-pll_register_string( 'slogan', 'Slogan', 'WordPress' );
-pll_register_string( 'comment', 'Comment', 'WordPress' );
-pll_register_string( 'login', 'You must be logged in to post a comment.', 'WordPress' );
-pll_register_string( 'logout', 'Logged in as. Log out?', 'WordPress' );
-pll_register_string( 'comment-notes', 'Required fields are marked *', 'WordPress' );
-pll_register_string( 'reply', 'Leave a Reply', 'WordPress' );
-pll_register_string( 'reply-to', 'Leave a Reply to', 'WordPress' );
-pll_register_string( 'reply-cancel', 'Cancel Reply', 'WordPress' );
-pll_register_string( 'post-comment', 'Post Comment', 'WordPress' );
-pll_register_string( 'name', 'Name', 'WordPress' );
-pll_register_string( 'email', 'Email', 'WordPress' );
-pll_register_string( 'website', 'Website', 'WordPress' );
-pll_register_string( 'more', 'More', 'WordPress' );
-pll_register_string( 'fresh-posts', 'Fresh posts', 'WordPress' );
-pll_register_string( 'fresh-comments', 'Fresh comments', 'WordPress' );
-pll_register_string( 'tel', 'Tel', 'WordPress' );
-pll_register_string( 'name', 'Name', 'WordPress' );
-pll_register_string( 'submit', 'Submit', 'WordPress' );
-pll_register_string( 'form_success', 'FormSuccess', 'WordPress' );
-pll_register_string( 'captcha', 'Incorrect value', 'WordPress' );
-pll_register_string( 'captcha', 'Enter a number', 'WordPress' );
-pll_register_string( 'captcha', 'How many', 'WordPress' );
-pll_register_string( 'buy', 'Buy', 'WordPress' );
-pll_register_string( 'related_products', 'Related products', 'WordPress' );
+if (function_exists('pll_register_string')) {
+    pll_register_string( 'search', 'Search', 'WordPress' );
+    pll_register_string( 'slogan', 'Slogan', 'WordPress' );
+    pll_register_string( 'comment', 'Comment', 'WordPress' );
+    pll_register_string( 'login', 'You must be logged in to post a comment.', 'WordPress' );
+    pll_register_string( 'logout', 'Logged in as. Log out?', 'WordPress' );
+    pll_register_string( 'comment-notes', 'Required fields are marked *', 'WordPress' );
+    pll_register_string( 'reply', 'Leave a Reply', 'WordPress' );
+    pll_register_string( 'reply-to', 'Leave a Reply to', 'WordPress' );
+    pll_register_string( 'reply-cancel', 'Cancel Reply', 'WordPress' );
+    pll_register_string( 'post-comment', 'Post Comment', 'WordPress' );
+    pll_register_string( 'name', 'Name', 'WordPress' );
+    pll_register_string( 'email', 'Email', 'WordPress' );
+    pll_register_string( 'website', 'Website', 'WordPress' );
+    pll_register_string( 'more', 'More', 'WordPress' );
+    pll_register_string( 'fresh-posts', 'Fresh posts', 'WordPress' );
+    pll_register_string( 'fresh-comments', 'Fresh comments', 'WordPress' );
+    pll_register_string( 'tel', 'Tel', 'WordPress' );
+    pll_register_string( 'name', 'Name', 'WordPress' );
+    pll_register_string( 'submit', 'Submit', 'WordPress' );
+    pll_register_string( 'form_success', 'FormSuccess', 'WordPress' );
+    pll_register_string( 'captcha', 'Incorrect value', 'WordPress' );
+    pll_register_string( 'captcha', 'Enter a number', 'WordPress' );
+    pll_register_string( 'captcha', 'How many', 'WordPress' );
+    pll_register_string( 'buy', 'Buy', 'WordPress' );
+    pll_register_string( 'related_products', 'Related products', 'WordPress' );
+}
 
 // Open comments
 add_filter( 'comments_open', function($open, $post_id) {
