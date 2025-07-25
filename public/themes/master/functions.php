@@ -251,7 +251,7 @@ function send_form() {
     if (!empty($_POST['productID'])) $productID = $_POST['productID'];
 
     // $to = "shumjachi@gmail.com";
-    $to = "info@master5.kiev.ua";
+    $to = get_option('admin_email');
     $subject = 'Повідомлення з master5.kiev.ua';
 
     $body = '<html>
@@ -301,7 +301,7 @@ function send_comment_email($comment_id) {
     $comment = get_comment($comment_id);
     $post = get_post($comment->comment_post_ID);
 
-    $to = 'info@master5.kiev.ua';
+    $to = get_option('admin_email');
     $subject = 'Новий коментар на вашому сайті';
     $body = '<html>
         <head>
@@ -566,9 +566,120 @@ function get_attribute_terms_by_language($request) {
             'slug'  => $attribute->attribute_name,
             'label' => $label,
             'terms' => $terms_data,
+            'taxonomy' => $taxonomy
         ];
     }
 
     return rest_ensure_response($results);
 }
+
+/*
+|--------------------------------------------------------------------------
+| API FILTER PRODUCTS BY LANG
+|--------------------------------------------------------------------------
+*/
+add_action('rest_api_init', function () {
+    register_rest_route('custom/v1', '/products', [
+        'methods'             => 'POST',
+        'callback'            => 'custom_get_filtered_products',
+        'permission_callback' => '__return_true',
+    ]);
+});
+
+function custom_get_filtered_products($request) {
+    $params = $request->get_params();
+    $per_page = (int) ($params['per_page'] ?: 12);
+    $page     = (int) ($params['page']?: 1);
+    $offset   = ($page - 1) * $per_page;
+
+    $args = [
+        'post_type'      => 'product',
+        'posts_per_page' => $per_page,
+        'offset'         => $offset,
+        'orderby'        => sanitize_text_field($request->get_param('orderby') ?: 'date'),
+        'order'          => sanitize_text_field($request->get_param('order') ?: 'DESC'),
+        'meta_query'     => [],
+        'tax_query'      => [],
+    ];
+
+    if (!empty($params['lang'])) {
+        $args['meta_query'][] = [
+            'key'     => '_lang',
+            'value'   => $params['lang'],
+            'compare' => '=',
+        ];
+    }
+
+    if (!empty($params['min_price'])) {
+        $args['meta_query'][] = [
+            'key'     => '_price',
+            'value'   => floatval($params['min_price']),
+            'compare' => '>=',
+            'type'    => 'NUMERIC',
+        ];
+    }
+
+    if (!empty($params['max_price'])) {
+        $args['meta_query'][] = [
+            'key'     => '_price',
+            'value'   => floatval($params['max_price']),
+            'compare' => '<=',
+            'type'    => 'NUMERIC',
+        ];
+    }
+
+    $attributes = $params['attributes'];
+
+    if (is_array($attributes)) {
+        foreach ($attributes as $attr) {
+            $slugs = $attr['slug'] ?? [];
+
+            if (
+                empty($attr['attribute']) ||
+                !taxonomy_exists($attr['attribute']) ||
+                !is_array($slugs) ||
+                count(array_filter($slugs)) === 0
+            ) {
+                continue;
+            }
+
+            $args['tax_query'][] = [
+                'taxonomy' => sanitize_text_field($attr['attribute']),
+                'field'    => 'slug',
+                'terms'    => array_map('sanitize_text_field', $slugs),
+                'operator' => !empty($attr['operator']) ? sanitize_text_field($attr['operator']) : 'IN',
+            ];
+        }
+    }
+
+    $query = new WP_Query($args);
+
+    $products = [];
+    foreach ($query->posts as $post) {
+        $product = wc_get_product($post->ID);
+        if (!$product) continue;
+
+        $products[] = [
+            'id'        => $product->get_id(),
+            'name'      => $product->get_name(),
+            'price'     => $product->get_price_html(),
+            'currency'  => get_woocommerce_currency_symbol(),
+            'lang'      => get_post_meta($product->get_id(), '_lang', true),
+            'permalink' => get_permalink($product->get_id()),
+            'image'     => wp_get_attachment_image_url($product->get_image_id(), 'medium'),
+        ];
+    }
+
+    return rest_ensure_response([
+        'products'    => $products,
+        'total'       => $query->found_posts,
+        'page'        => $page,
+        'per_page'    => $per_page,
+        'totalPages'  => ceil($query->found_posts / $per_page)
+    ]);
+}
+
+
+
+
 

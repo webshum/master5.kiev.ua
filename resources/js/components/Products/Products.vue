@@ -30,9 +30,9 @@ async function fetchProductsData(query) {
 
 	const result = await fetchProducts(query);
 
-	products.value = result.data;
-	total.value = result.meta.total;
-	totalPages.value = result.meta.totalPages;
+	products.value = result.data.products;
+	total.value = result.data.total;
+	totalPages.value = result.data.totalPages;
 	isLoading.value = false;
 }
 
@@ -58,8 +58,7 @@ onMounted(() => {
 watch(() => props.filters, (newFilters) => {
     query.value = {
         ...query.value, 
-        ...newFilters,
-        page: 1
+        ...newFilters
     };
     fetchProductsData(query.value);
 }, { deep: true });

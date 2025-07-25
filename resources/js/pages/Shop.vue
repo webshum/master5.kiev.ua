@@ -7,6 +7,6 @@ const filters = ref([]);
 </script>
 
 <template>
-	<Filters @filters="console.log(filters = $event)"/>
+	<Filters @filters="filters = $event"/>
 	<Products :filters="filters"/>
 </template>

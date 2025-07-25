@@ -47,6 +47,54 @@
     </div>
 </div>
 
+<div class="popup-discount popup">
+    <a href="#" class="popup-close">
+        <svg width="24" height="24"><use xlink:href="#close"></use></svg>
+    </a>
+
+    <div class="body">
+        <?php $lang = ($lang == 'uk') ? 'uk' : 'ru'; ?>
+        <?php if (!empty(get_fields('options')["title_$lang"])) : ?>
+        <h3 class="title">
+            <?php echo get_fields('options')["title_$lang"]; ?>
+        </h3>
+        <?php endif ?>
+        
+        <?php if (!empty(get_fields('options')["text_$lang"])) : ?>
+        <div class="text">
+            <?php echo get_fields('options')["text_$lang"]; ?>
+
+            <?php if (!empty(get_fields('options')["percent"])) : ?>
+            <div class="percent">
+                -<?php echo get_fields('options')["percent"]; ?>%
+            </div>
+            <?php endif ?>
+        </div>
+        <?php endif ?>
+
+        <?php 
+            $url = !empty(get_fields('options')["url"]) ? get_fields('options')["url"] : '';
+        ?>
+        <?php if (!empty(get_fields('options')["image"])) : ?>
+        <div class="image">
+            <a href="<?php echo $url ?>" target="_blank">
+                <img src="<?php echo get_fields('options')["image"]['url']; ?>" alt="<?php echo get_fields('options')["image"]['alt']; ?>">
+            </a>
+        </div>
+        <?php endif ?>
+    </div>
+</div>
+
+<?php if (!empty(get_fields('options')['onoff']) && get_fields('options')['onoff']) : ?>
+    <a href="#" class="btn-popup" data-popup="discount"></a>
+    <script>
+        window.addEventListener('load', function () {
+            const btn = document.querySelector('.btn-popup[data-popup="discount"]');
+            if (btn) btn.click();
+        });
+    </script>
+<?php endif; ?>
+
 <div class="popup-order popup" id="app-popup">
     <a href="#" class="popup-close">
         <svg width="24" height="24"><use xlink:href="#close"></use></svg>

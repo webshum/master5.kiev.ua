@@ -1,12 +1,16 @@
 const URL = import.meta.env.VITE_API_URL;
-const API_URL_GET_PRODUCTS = URL + '/wp-json/wc/store/v1/products';
+const API_URL_GET_PRODUCTS = URL + '/wp-json/custom/v1/products';
 const API_URL_GET_FILTERS = URL + '/wp-json/custom/v1/attribute-terms';
 
 const fetchProducts = async (data) => {
 	try {
-		const params = new URLSearchParams(data).toString();
-		const url = `${API_URL_GET_PRODUCTS}?${params}`;
-		const response = await fetch(url);
+		const response = await fetch(API_URL_GET_PRODUCTS, {
+		    method: 'POST',
+		    headers: {
+		        'Content-Type': 'application/json',
+		    },
+		    body: JSON.stringify(data),
+	    });
 
 		if (response.ok) {
 			const json = await response.json();

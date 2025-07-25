@@ -359,3 +359,49 @@ main {flex: 1;}
         max-width: 95%;
     }
 }
+
+.popup-discount {
+    background: #fff218;
+    min-width: 300px;
+
+    h3.title {
+        font-weight: bold;
+        font-size: 20px;
+        text-align: center;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+    }
+
+    .text {
+        position: relative;
+        text-align: center;
+        h3, h4 {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        h4 {font-size: 15px;}
+    }
+
+    .percent {
+        position: absolute;
+        right: -15px;
+        top: 100%;
+        border-radius: 50%;
+        width: 70px;
+        height: 70px;
+        background: var(--c-akcent);
+        color: #fff;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .image {
+        margin: 30px auto 0 auto;
+        max-width: 300px;
+    }
+}

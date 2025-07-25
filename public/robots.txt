@@ -1,0 +1,14 @@
+User-agent: *
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /cart
+Disallow: /checkout
+Disallow: /my-account
+Disallow: /?s=
+Disallow: /*add-to-cart=*
+Disallow: /*orderby=
+Disallow: /*srsltid=*
+
+Allow: /wp-admin/admin-ajax.php
+
+Sitemap: https://master5.kiev.ua/sitemap.xml

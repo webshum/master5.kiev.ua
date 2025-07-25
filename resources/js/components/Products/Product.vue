@@ -8,34 +8,16 @@ const props = defineProps({
 		required: true
 	}
 });
-
-const price = computed(() => {
-	const p = props.product.prices;
-
-	const raw = Number(p.price) / Math.pow(10, p.currency_minor_unit); 
-
-	const parts = raw
-		.toFixed(p.currency_minor_unit)
-		.split(".");
-
-	let intPart = parts[0];
-	const decPart = parts[1];
-
-	intPart = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, p.currency_thousand_separator);
-
-	return `${intPart}${p.currency_decimal_separator}${decPart} ${p.currency_symbol}`;
-});
 </script>
 
 <template>
 	<a 
 		:href="product.permalink" 
 		class="image" 
-		v-if="product.images[0] !== null"
 	>	
 		<img 
-			v-if="product.images.length"
-			:src="`${product.images[0].src}`" 
+			v-if="product.image"
+			:src="`${product.image}`" 
 			loading="lazy" 
 			alt=""
 		>
@@ -45,9 +27,7 @@ const price = computed(() => {
 
 	<h2><a :href="product.permalink">{{ product.name }}</a></h2>
 
-	<div class="price">
-		<b>{{ price }}</b>
-	</div>
+	<div class="price" v-html="product.price"></div>
 
 	<a 
 		:href="product.permalink" 
