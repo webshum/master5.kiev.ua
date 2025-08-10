@@ -2,10 +2,10 @@
     	<div class="footer-main center">
     		<div class="footer-col">
     			<?php
-                wp_nav_menu([
-                    'theme_location' => 'navigation_footer_shop',
-                    'container' => '',
-                ]);
+                    wp_nav_menu([
+                        'theme_location' => 'navigation',
+                        'container' => '',
+                    ]);
                 ?>
     		</div>
 

@@ -20,6 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 global $product;
+$attributes = $product->get_attributes();
 
 ?>
 <div class="<?php echo esc_attr( apply_filters( 'woocommerce_product_price_class', 'price' ) ); ?>">
@@ -35,3 +36,23 @@ global $product;
 		<?= pll__('Buy') ?>
 	</a>
 </div>
+
+	<?php
+		foreach ( $attributes as $attribute ) {
+		    if ( $attribute->get_visible() ) {
+
+		        $name = wc_attribute_label( $attribute->get_name() );
+
+		        echo '<p class="attribute"><strong>' . esc_html( $name ) . ':</strong> ';
+
+		        if ( $attribute->is_taxonomy() ) {
+		            $values = wc_get_product_terms( $product->get_id(), $attribute->get_name(), array( 'fields' => 'names' ) );
+		            echo esc_html( implode( ', ', $values ) );
+		        } else {
+		            echo esc_html( $attribute->get_options()[0] );
+		        }
+
+		        echo '</p>';
+		    }
+		}
+	?>

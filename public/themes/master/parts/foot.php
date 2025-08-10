@@ -89,8 +89,25 @@
     <a href="#" class="btn-popup" data-popup="discount"></a>
     <script>
         window.addEventListener('load', function () {
-            const btn = document.querySelector('.btn-popup[data-popup="discount"]');
-            if (btn) btn.click();
+            const btn = document.querySelector('[data-popup="discount"]');
+
+            if (btn && !sessionStorage.getItem('popup_discount_shown')) {
+
+                setTimeout(() => {
+                    btn.click();
+                }, 15000);
+
+                const popup = document.querySelector('.popup-discount');
+                if (popup) {
+                    const closeBtn = popup.querySelector('.popup-close'); 
+
+                    if (closeBtn) {
+                        closeBtn.addEventListener('click', function () {
+                            sessionStorage.setItem('popup_discount_shown', 'true');
+                        });
+                    }
+                }
+            }
         });
     </script>
 <?php endif; ?>
@@ -106,6 +123,8 @@
 </div>
 
 <svg class="hidden">
+    <symbol id="cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-cart-icon lucide-shopping-cart"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></symbol>
+
     <symbol viewBox="0 0 50 50" id="instagram">
         <path d="M 16 3 C 8.8324839 3 3 8.8324839 3 16 L 3 34 C 3 41.167516 8.8324839 47 16 47 L 34 47 C 41.167516 47 47 41.167516 47 34 L 47 16 C 47 8.8324839 41.167516 3 34 3 L 16 3 z M 16 5 L 34 5 C 40.086484 5 45 9.9135161 45 16 L 45 34 C 45 40.086484 40.086484 45 34 45 L 16 45 C 9.9135161 45 5 40.086484 5 34 L 5 16 C 5 9.9135161 9.9135161 5 16 5 z M 37 11 A 2 2 0 0 0 35 13 A 2 2 0 0 0 37 15 A 2 2 0 0 0 39 13 A 2 2 0 0 0 37 11 z M 25 14 C 18.936712 14 14 18.936712 14 25 C 14 31.063288 18.936712 36 25 36 C 31.063288 36 36 31.063288 36 25 C 36 18.936712 31.063288 14 25 14 z M 25 16 C 29.982407 16 34 20.017593 34 25 C 34 29.982407 29.982407 34 25 34 C 20.017593 34 16 29.982407 16 25 C 16 20.017593 20.017593 16 25 16 z"/>
     </symbol>

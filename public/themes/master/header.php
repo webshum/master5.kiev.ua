@@ -40,10 +40,10 @@ $lang = pll_current_language();
 
                     <nav class="nav" role="navigation">
                         <?php
-                        wp_nav_menu([
-                            'theme_location' => 'navigation',
-                            'container' => '',
-                        ]);
+                            wp_nav_menu([
+                                'theme_location' => 'navigation',
+                                'container' => '',
+                            ]);
                         ?>
                     </nav>
 

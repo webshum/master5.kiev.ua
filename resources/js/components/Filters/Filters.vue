@@ -82,6 +82,7 @@ onMounted(() => {
 </script>
 
 <template>
+	
 	<form action="#" name="filters" class="filters">
 		<input type="hidden" name="orderby" :value="data.orderby">
 		<input type="hidden" name="order" :value="data.order">

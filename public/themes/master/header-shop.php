@@ -6,7 +6,7 @@ $lang = pll_current_language();
 ?>
 
     <div class="wrapper">
-        <header id="header">
+        <header id="header" class="header-shop">
             <div class="center head-bar flex justify-between items-center">
                 <div>
                     <a href="/" class="logo">
@@ -19,7 +19,13 @@ $lang = pll_current_language();
                 </div>
 
                 <?php if (!empty(get_fields('options')['s_work_time'])) : ?>
-                    <div class="work-time"><?= get_fields('options')['s_work_time'] ?></div>
+                    <div class="work-time">
+                        <?= get_fields('options')['s_work_time'] ?>
+                        <div class="ic-cart">
+                            <svg><use xlink:href="#cart"></use></svg>
+                            <span>0</span>
+                        </div>        
+                    </div>
                 <?php endif; ?>
 
                 <form action="/" class="form-search">

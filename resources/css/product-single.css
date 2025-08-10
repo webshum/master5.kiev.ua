@@ -1,3 +1,7 @@
+.single-product {
+	.wrapper {overflow-x: visible;}
+}
+
 .product-single {
 	background: #fff;
 	padding: 50px 0;
@@ -9,31 +13,36 @@
 		width: auto !important;
 	}
 
+	.woocommerce-product-gallery {
+		position: sticky !important;
+		top: 120px;
+	}
+
 	.grid {
 		display: grid;
 		grid-template-columns: 0.8fr 1fr;
 		gap: 50px 100px;
+		align-items: start;
 	}
 
 	.entry-summary {
 		display: flex;
 		flex-direction: column;
 
-		.entry-title {font-size: 25px;}
+		.entry-title {font-size: 20px;}
 
 		.price {
-			order: 1;
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
 			padding: 10px 0;
-			margin: 25px 0;
+			margin: 25px 0 15px 0;
 			border-top: 1px solid #ccc;
 			border-bottom: 1px solid #ccc;
 
 
 			.amount {
-				font-size: 30px;
+				font-size: 20px;
 				font-weight: 500;
 				color: var(--c-akcent);
 			}
@@ -42,9 +51,27 @@
 				font-weight: bold;
 				font-size: 20px;
 			}
+
+			.btn-green {zoom: 0.8;}
 		}
 
-		.product_meta {order: 2}
+		.product_title {order: -2;}
+
+		.product_meta {
+			order: -1;
+			display: flex;
+			flex-direction: column;
+			gap: 5px 0;
+			.sku, a {font-weight: bold;}
+		}
+	}
+
+	.attribute {
+		margin-top: 0;
+		font-size: 11px;
+		color: #5b5b5b;
+		padding: 10px 0;
+		border-bottom: 1px solid #efefef;
 	}
 
 	.flex-control-thumbs {
@@ -63,7 +90,13 @@
 	    }
 	}
 
+	@media (max-width: 1300px) { 
+		.grid {gap: 35px 50px;}
+	}
+
 	@media (max-width: 991px) { 
+		.woocommerce-product-gallery {position: static !important;}
+
 		.grid {
 			grid-template-columns: 1fr;
 			gap: 35px 100px;
@@ -150,7 +183,7 @@
 		justify-content: space-between;
 
 		.amount {
-			font-size: 18px !important;
+			font-size: 15px !important;
 			font-weight: 500;
 			color: var(--c-akcent);
 		}
@@ -158,10 +191,11 @@
 		.btn-green {
 			font-size: 14px;
 			padding: 10px 25px;
+			zoom: 0.9;
 		}
 	}
 
-	.woocommerce-loop-product__title {font-size: 15px;}
+	.woocommerce-loop-product__title {font-size: 10px;}
 
 	@media (max-width: 991px) {
 		.splide__track {overflow: visible;}

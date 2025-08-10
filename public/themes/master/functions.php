@@ -26,6 +26,7 @@ add_action('after_setup_theme', function () {
 if (function_exists('pll_register_string')) {
     pll_register_string( 'search', 'Search', 'WordPress' );
     pll_register_string( 'slogan', 'Slogan', 'WordPress' );
+    pll_register_string( 'slogan_shop', 'Slogan Shop', 'WordPress' );
     pll_register_string( 'comment', 'Comment', 'WordPress' );
     pll_register_string( 'login', 'You must be logged in to post a comment.', 'WordPress' );
     pll_register_string( 'logout', 'Logged in as. Log out?', 'WordPress' );

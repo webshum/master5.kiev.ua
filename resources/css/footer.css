@@ -87,6 +87,17 @@
     }
 
     .footer-col {
+        @media (max-width: 991px) {
+            .menu {
+                flex-direction: column;
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .menu {text-align: center;}
+        }
+
         ul {
             display: flex;
             gap: 0 15px;
@@ -97,6 +108,12 @@
 
         @media (max-width: 550px) {
             ul {flex-direction: column;}
+        }
+    }
+
+    .work-time {
+        @media (max-width: 767px) {
+            justify-content: center;
         }
     }
 
