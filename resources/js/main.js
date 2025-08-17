@@ -1,6 +1,7 @@
 const URL = import.meta.env.VITE_API_URL;
 const API_URL_GET_PRODUCTS = URL + '/wp-json/custom/v1/products';
 const API_URL_GET_FILTERS = URL + '/wp-json/custom/v1/attribute-terms';
+const API_URL_GET_CATEGORIES = URL + '/wp-json/custom/v1/categories';
 
 const fetchProducts = async (data) => {
 	try {
@@ -27,6 +28,19 @@ const fetchProducts = async (data) => {
 		}
 	} catch (error) {
 		console.log('Fetch error get_products: ', error);
+	}
+}
+
+const fetchCategories = async (local) => {
+	try {
+		const response = await fetch(`${API_URL_GET_CATEGORIES}?lang=${local}`);
+
+		if (response.ok) {
+			const json = await response.json();
+			return json;
+		} 
+	} catch (error) {
+		console.log('Fetch error get_categories: ', error);
 	}
 }
 
@@ -59,6 +73,7 @@ const fetchFilterById = async (id) => {
 
 export {
 	fetchProducts,
+	fetchCategories,
 	fetchFilters,
 	fetchFilterById
 };

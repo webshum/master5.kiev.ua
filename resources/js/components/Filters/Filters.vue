@@ -1,12 +1,14 @@
 <script setup>
 import { ref, onMounted, reactive } from 'vue';
-import { fetchFilters, fetchFilterById } from '../../main.js';
+import { fetchFilters, fetchCategories, fetchFilterById } from '../../main.js';
 import { getCookie } from '../../helpers.js';
 
 const locale = getCookie('pll_language') || 'ru';
 const filters = ref(null);
+const categories = ref(null);
 const emit = defineEmits(['filters']);
 const perPage = import.meta.env.VITE_API_PAR_PAGE || 10;
+const isProductCategoryPage = ref(false);
 const data = reactive({
 	lang: locale,
 	page: 1,
@@ -23,6 +25,7 @@ const priceRange = reactive({
 });
 
 async function fetchFiltersData() {
+	const resultCategories = await fetchCategories(locale);
 	const attrs = await fetchFilters(locale);
 
 	const filtersWithTerms = await Promise.all(
@@ -37,6 +40,7 @@ async function fetchFiltersData() {
 	);
 
 	filters.value = filtersWithTerms;
+	categories.value = resultCategories;
 }
 
 function onChoice(count, index, taxonomy, slug, checked) {
@@ -77,6 +81,8 @@ const onChange = () => {
 };
 
 onMounted(() => {
+	isProductCategoryPage.value = window.location.pathname.includes('product-category');
+
 	fetchFiltersData();
 });
 </script>
@@ -90,8 +96,15 @@ onMounted(() => {
 		<input type="hidden" name="per_page" :value="perPage">
 		<input type="hidden" name="page" :value="page">
 		<input type="hidden" name="lang" :value="data.lang">
+		
+		<div class="group group-categories" v-if="!isProductCategoryPage">
+			<h3>{{ $t('category') }}</h3>
+			<a :href="category.link" v-for="(category, index) in categories">
+				{{ category.name }}
+			</a>
+		</div>
 
-		<div class="group group-price">
+		<div class="group group-price" v-if="isProductCategoryPage">
 			<input type="number" v-model.number="priceRange.min" placeholder="0">
 			<span>-</span> 
 			<input type="number" v-model.number="priceRange.max" placeholder="99999">
@@ -102,6 +115,7 @@ onMounted(() => {
 			class="group" 
 			v-for="(filter, count) in filters" 
 			:key="count"
+			v-if="isProductCategoryPage"
 		>
 			<div v-if="filter.label !== 'Артикул'">
 				<div class="title">

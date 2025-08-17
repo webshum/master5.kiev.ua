@@ -18,7 +18,8 @@ const messages = {
 	    errCity: 'Выберите город',
 	    errWarehouse: 'Выберите отделение',
 	    order: 'Замовити',
-	    buy: 'Купить'
+	    buy: 'Купить',
+	    category: 'Категории'
 	},
 	uk: {
 	    close: 'Закрити',
@@ -34,7 +35,8 @@ const messages = {
 	    errCity: 'Оберіть місто',
 	    errWarehouse: 'Оберіть відділення',
 	    order: 'Заказать',
-	    buy: 'Купити'
+	    buy: 'Купити',
+	    category: 'Категорії'
 	}
 };
 

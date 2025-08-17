@@ -11,19 +11,24 @@ const isLoading = ref(false);
 const total = ref(1);
 const totalPages = ref(1);
 
-const query = ref({
-	per_page: perPage,
-	page: 1,
-	lang: locale
-});
-
 const props = defineProps({
 	filters: {
 		type: Object, 
 		default: {},
 		required: true
+	},
+	category: {
+		type: Number, 
+		default: 0
 	}
-})
+});
+
+const query = ref({
+	per_page: perPage,
+	page: 1,
+	lang: locale,
+	categoryID: props.category,
+});
 
 async function fetchProductsData(query) {
 	isLoading.value = true;

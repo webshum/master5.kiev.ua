@@ -528,11 +528,24 @@ function get_attribute_terms_by_language($request) {
         return new WP_Error('pll_missing', 'Polylang is not active', ['status' => 500]);
     }
 
+    $category_attributes = [
+        'bojler' => ['color', 'power'],
+        'teni'   => ['material', 'size'],
+    ];
+
     $attributes = wc_get_attribute_taxonomies();
     $results = [];
 
     foreach ($attributes as $attribute) {
         $taxonomy = wc_attribute_taxonomy_name($attribute->attribute_name);
+
+        // якщо category задана і цей атрибут не дозволений для неї — пропускаємо
+        if ($category_slug && isset($category_attributes[$category_slug])) {
+            $allowed = $category_attributes[$category_slug];
+            if (!in_array($attribute->attribute_name, $allowed)) {
+                continue;
+            }
+        }
 
         $terms = get_terms([
             'taxonomy' => $taxonomy,
@@ -591,6 +604,7 @@ function custom_get_filtered_products($request) {
     $params = $request->get_params();
     $per_page = (int) ($params['per_page'] ?: 12);
     $page     = (int) ($params['page']?: 1);
+    $categoryID = (int) ($params['categoryID'] ?: 0);
     $offset   = ($page - 1) * $per_page;
 
     $args = [
@@ -602,6 +616,14 @@ function custom_get_filtered_products($request) {
         'meta_query'     => [],
         'tax_query'      => [],
     ];
+
+    if (!empty($categoryID)) {
+        $args['tax_query'][] = [
+            'taxonomy' => 'product_cat', 
+            'field'    => 'term_id',    
+            'terms'    => $categoryID,   
+        ];
+    }
 
     if (!empty($params['lang'])) {
         $args['meta_query'][] = [
@@ -680,7 +702,51 @@ function custom_get_filtered_products($request) {
     ]);
 }
 
+/*
+|--------------------------------------------------------------------------
+| API CATEGORIES
+|--------------------------------------------------------------------------
+*/
+add_action('rest_api_init', function () {
+    register_rest_route('custom/v1', '/categories', [
+        'methods'  => 'GET',
+        'callback' => 'get_categories_by_language',
+        'permission_callback' => '__return_true'
+    ]);
+});
 
+function get_categories_by_language($request) {
+    $args = [
+        'taxonomy'   => 'product_cat',
+        'hide_empty' => false,
+    ];
 
+    $categories = get_terms($args);
 
+    $result = [];
+    foreach ($categories as $cat) {
+        $result[] = [
+            'id'   => $cat->term_id,
+            'name' => $cat->name,
+            'slug' => $cat->slug,
+            'link' => get_term_link($cat)
+        ];
+    }
 
+    return $result;
+}
+
+/*
+|--------------------------------------------------------------------------
+| CHANGE TEMPLATE ARCHIVE
+|--------------------------------------------------------------------------
+*/
+add_filter('template_include', function($template) {
+    if ( is_tax('product_cat') ) {
+        $custom_template = get_stylesheet_directory() . '/woocommerce/taxonomy-product-cat.php';
+        if ( file_exists( $custom_template ) ) {
+            return $custom_template;
+        }
+    }
+    return $template;
+}, 9999);

@@ -1,3 +1,7 @@
+.main-comment {
+    padding: 50px 0 !important;
+}
+
 .custom-reply-title {display: none;}
 .comment-list {
     & > .comment {

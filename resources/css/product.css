@@ -65,6 +65,17 @@
 		cursor: pointer;
 	}
 
+	.group-categories {
+		display: flex;
+		flex-direction: column;
+		gap: 10px 0;
+		
+		a {
+			text-decoration: underline;
+			&:hover {text-decoration: none;}
+		}
+	}
+
 	.group-price {
 		display: flex;
 		align-items: center;

@@ -19,4 +19,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-wc_get_template( 'archive-product.php' );
+get_header('shop');
+
+$category = get_queried_object();
+?>
+
+<main id="shop">
+    <div class="center">
+        <shop :category="'<?= $category->term_id ?>'"></shop>
+    </div>
+</main>
+
+<div class="center main-comment">
+    <?php
+        if (!is_page('order-received')) {
+            if ( (comments_open() || get_comments_number()) && empty(get_field('onoff_comments')) ) {
+                comments_template();
+            }
+        }
+    ?>
+</div>
+
+<?php get_footer('shop'); ?>
