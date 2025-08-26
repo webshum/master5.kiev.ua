@@ -470,6 +470,7 @@ function handle_vue_order(WP_REST_Request $request) {
         $order->update_meta_data('np_region', sanitize_text_field($data['region']));
         $order->update_meta_data('np_city', sanitize_text_field($data['city']));
         $order->update_meta_data('np_warehouse', sanitize_text_field($data['warehouse']));
+        $order->update_meta_data('address', sanitize_text_field($data['address']));
 
         $order->calculate_totals();
         $order->update_status('processing');
@@ -490,8 +491,8 @@ function handle_vue_order(WP_REST_Request $request) {
     return new WP_REST_Response(['status' => 'error', 'message' => 'No product ID'], 400);
 }
 
-
 add_action('woocommerce_admin_order_data_after_billing_address', function($order){
+    echo '<p><strong>Адреса:</strong> ' . esc_html($order->get_meta('address')) . '</p>';
     echo '<p><strong>Регіон:</strong> ' . esc_html($order->get_meta('np_region')) . '</p>';
     echo '<p><strong>Місто:</strong> ' . esc_html($order->get_meta('np_city')) . '</p>';
     echo '<p><strong>Відділення:</strong> ' . esc_html($order->get_meta('np_warehouse')) . '</p>';
@@ -501,12 +502,41 @@ add_action('woocommerce_email_after_order_table', function($order, $sent_to_admi
     $supported_ids = ['new_order', 'customer_processing_order', 'customer_completed_order'];
 
     if (in_array($email->id, $supported_ids)) {
-        echo '<h2>Дані Нової Пошти</h2>';
-        echo '<p><strong>Регіон:</strong> ' . esc_html($order->get_meta('np_region')) . '</p>';
-        echo '<p><strong>Місто:</strong> ' . esc_html($order->get_meta('np_city')) . '</p>';
-        echo '<p><strong>Відділення:</strong> ' . esc_html($order->get_meta('np_warehouse')) . '</p>';
+        $product_items = $order->get_items();
+        $products_html = '';
+
+        foreach ($product_items as $item) {
+            $product = $item->get_product();
+            if ($product) {
+                $products_html .= '<p style="font-size:18px; margin:5px 0;">'
+                    . '<strong>Код товару:</strong> ' . esc_html($product->get_sku()) . '<br>'
+                    . '<a href="' . esc_url($product->get_permalink()) . '" target="_blank">'
+                    . esc_html($product->get_name()) . '</a>'
+                    . '</p>';
+            }
+        }
+
+        echo '<div style="margin-top:30px; padding:20px; border:2px solid #000; background:#f9f9f9;">';
+        echo '<h2 style="font-size:22px; margin-bottom:15px;">Дані замовника:</h2>';
+        echo '<p style="font-size:18px; margin:5px 0;"><strong>Ім’я:</strong> ' . esc_html($order->get_billing_first_name()) . '</p>';
+        echo '<p style="font-size:18px; margin:5px 0;"><strong>Телефон:</strong> ' . esc_html($order->get_billing_phone()) . '</p>';
+        /*echo '<p style="font-size:18px; margin:5px 0;"><strong>Місто:</strong> ' . esc_html($order->get_meta('np_city')) . '</p>';*/
+
+        if ($order->get_meta('address')) {
+            echo '<p style="font-size:18px; margin:5px 0;"><strong>Адреса (Київ):</strong> ' . esc_html($order->get_meta('address')) . '</p>';
+        }
+
+        if ($order->get_meta('np_warehouse')) {
+            echo '<p style="font-size:18px; margin:5px 0;"><strong>Відділення НП:</strong> ' . esc_html($order->get_meta('np_warehouse')) . '</p>';
+        }
+
+        echo '<h2 style="font-size:22px; margin:15px 0;">Товари:</h2>';
+        echo $products_html;
+
+        echo '</div>';
     }
-}, 20, 4);
+}, 30, 4);
+
 
 /*
 |--------------------------------------------------------------------------
@@ -538,7 +568,7 @@ function get_attribute_terms_by_language($request) {
 
     foreach ($attributes as $attribute) {
         $taxonomy = wc_attribute_taxonomy_name($attribute->attribute_name);
-
+        
         // якщо category задана і цей атрибут не дозволений для неї — пропускаємо
         if ($category_slug && isset($category_attributes[$category_slug])) {
             $allowed = $category_attributes[$category_slug];
@@ -551,17 +581,17 @@ function get_attribute_terms_by_language($request) {
             'taxonomy' => $taxonomy,
             'hide_empty' => false,
         ]);
-
+        
         $terms_data = [];
-
+        
         foreach ($terms as $term) {
             $lang_key = 'lang_' . $lang;
             $translated_name = get_term_meta($term->term_id, $lang_key, true);
-
+            
             if (!$translated_name) {
                 continue;
             }
-
+            
             $terms_data[] = [
                 'id'   => $term->term_id,
                 'slug' => $term->slug,
@@ -572,7 +602,7 @@ function get_attribute_terms_by_language($request) {
         if (empty($terms_data)) {
             continue;
         }
-
+        
         $label = wc_attribute_label($taxonomy);
 
         $results[] = [

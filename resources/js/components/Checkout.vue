@@ -14,9 +14,11 @@ const cities = ref([]);
 const warehouses = ref([]);
 const name = ref('');
 const phone = ref('');
+const address = ref('');
 const selectedRegion = ref({});
 const selectedCity = ref({});
 const selectedWarehouse = ref({});
+const preload = ref(false);
 
 const props = defineProps({
     productId: {
@@ -61,7 +63,11 @@ async function submitOrder() {
 		errors.value.push(t('errPhone'));
 	}
 
-	if (!selectedRegion.value?.Ref) {
+	if (!address.value || address.value.length < 3) {
+		errors.value.push(t('errAddress'));
+	}
+
+	/*if (!selectedRegion.value?.Ref) {
 		errors.value.push(t('errRegion'));
 	}
 
@@ -71,20 +77,23 @@ async function submitOrder() {
 
 	if (!selectedWarehouse.value?.Ref) {
 		errors.value.push(t('errWarehouse'));
-	}
+	}*/
 
 	if (errors.value.length > 0) return;
 
 	const payload = {
 		name: name.value,
 		phone: phone.value,
-		region: selectedRegion.value.Description,
+		address: address.value,
+		/*region: selectedRegion.value.Description,
 		city: selectedCity.value.Description,
-		warehouse: selectedWarehouse.value.Description,
+		warehouse: selectedWarehouse.value.Description,*/
 		productId: document.querySelector('.popup-order').dataset.productId
 	};
 
 	try {
+		preload.value = true;
+
 		const response = await fetch('/wp-json/myshop/v1/submit-order', {
 			method: 'POST',
 			headers: {'Content-Type': 'application/json'},
@@ -94,6 +103,7 @@ async function submitOrder() {
 		const result = await response.json();
 
 		if (response.ok && result.status == "success") {
+			preload.value = false;
 			location.href = result.redirect_url;
 		}
 	} catch (err) {
@@ -108,7 +118,10 @@ onMounted(() => {
 </script>
 
 <template>
-	{{productId}}
+	<div v-if="preload" class="preload">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect fill="#317a2d" stroke="#317a2d" stroke-width="15" width="30" height="30" x="25" y="50"><animate attributeName="y" calcMode="spline" dur="2" values="50;120;50;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="-.4"></animate></rect><rect fill="#317a2d" stroke="#317a2d" stroke-width="15" width="30" height="30" x="85" y="50"><animate attributeName="y" calcMode="spline" dur="2" values="50;120;50;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="-.2"></animate></rect><rect fill="#317a2d" stroke="#317a2d" stroke-width="15" width="30" height="30" x="145" y="50"><animate attributeName="y" calcMode="spline" dur="2" values="50;120;50;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="0"></animate></rect></svg>
+	</div>
+
 	<div class="form-row">
 		<label>{{ $t('name') }} <span class="required">*</span></label>
 		<input v-model="name" class="input-text" type="text">
@@ -118,8 +131,13 @@ onMounted(() => {
 		<label>{{ $t('phone') }} <span class="required">*</span></label>
 		<input v-model="phone" class="input-text" type="text">
 	</div>
+
+	<div class="form-row">
+		<label>{{ $t('address') }} <span class="required">*</span></label>
+		<input v-model="address" class="input-text" type="text">
+	</div>
 	
-	<div class="form-row" v-if="regions.length">
+	<!-- <div class="form-row" v-if="regions.length">
 		<label>{{ $t('region') }} <span class="required">*</span></label>
 		<Multiselect
 			v-model="selectedRegion"
@@ -128,9 +146,9 @@ onMounted(() => {
 			:placeholder="`${t('region')}`"
 			@select="getCities(selectedRegion.Ref)"
 		/>
-	</div>
+	</div> -->
 
-	<div class="form-row" v-if="cities.length">
+	<!-- <div class="form-row" v-if="cities.length">
 		<label>{{ $t('city') }} <span class="required">*</span></label>
 		<Multiselect
 			v-model="selectedCity"
@@ -139,9 +157,9 @@ onMounted(() => {
 			:placeholder="`${t('city')}`"
 			@select="getWarehouses(selectedCity.Ref)"
 		/>
-	</div>
+	</div> -->
 
-	<div class="form-row" v-if="warehouses.length">
+	<!-- <div class="form-row" v-if="warehouses.length">
 		<label>{{ $t('warehouse') }} <span class="required">*</span></label>
 		<Multiselect
 			v-model="selectedWarehouse"
@@ -149,7 +167,7 @@ onMounted(() => {
 			:label="`Description${locale}`"
 			:placeholder="`${t('warehouse')}`"
 		/>
-	</div>
+	</div> -->
 
 	<div class="text-center">
 		<button @click="submitOrder" class="btn-green">{{ $t('order') }}</button>
@@ -168,6 +186,28 @@ onMounted(() => {
 	.popup-order {
 		min-width: 450px;
 		max-width: 450px;
+
+		.preload {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: radial-gradient(rgba(255,255,255,.8) 40%, transparent);
+
+			svg {
+				width: 50px;
+				height: 50px;
+			}
+		}
+
+		@media (max-width: 500px) {
+			min-width: 320px;
+			max-width: 320px;
+		}
 	}
 
 	.form-row {

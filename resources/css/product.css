@@ -225,7 +225,7 @@
 			font-size: 12px;
 			margin-bottom: 15px;
 			font-weight: bold;
-			color: #1dce25 !important;
+			color: var(--c-akcent) !important;
 		}
 
 		.btn-green {
@@ -260,6 +260,7 @@
 	ul {
 		display: flex;
 		align-items: center;
+		flex-wrap: wrap;
 		gap: 0 10px;
 
 		li {
