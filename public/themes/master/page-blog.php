@@ -7,6 +7,7 @@ get_header();
 <main class="main-blog">
     <div class="center">
         <div class="content-blog">
+            <?php if (function_exists('custom_breadcrumbs')) custom_breadcrumbs(); ?>
             <h1 class="text-center"><?php the_title(); ?></h1>
 
             <?php

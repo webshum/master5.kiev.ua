@@ -90,6 +90,14 @@ $content = get_field('content');
                 <?= $content ?>
             </div>
         <?php endif; ?>
+
+        <div class="mt-5">
+        <?php
+            if ( (comments_open() || get_comments_number()) && empty(get_field('onoff_comments')) ) {
+                comments_template();
+            }
+        ?>
+        </div>
     </div>
 </main>
 

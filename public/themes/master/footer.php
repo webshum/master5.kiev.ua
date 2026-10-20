@@ -1,16 +1,16 @@
     <footer id="footer">
         <div class="center">
             <div class="copy">
-                © <?= date('Y') ?> 
-                <?php 
-                    $lang = pll_current_language(); 
+                © <?= date('Y') ?>
+                <?php
+                    $lang = pll_current_language();
 
                     if (!empty(get_fields('options')["copyright_{$lang}"])) {
                         echo get_fields('options')["copyright_{$lang}"];
-                    }  
-                ?> 
+                    }
+                ?>
             </div>
-            
+
             <?php if (!empty(get_fields('options')['work_time'])) : ?>
                 <div class="work-time"><?= get_fields('options')['work_time'] ?></div>
             <?php endif; ?>
@@ -51,7 +51,7 @@
         <svg width="24" height="24"><use xlink:href="#close"></use></svg>
     </a>
 
-    <div class="body">  
+    <div class="body">
         <form id="contact-form" method="POST" name="order">
             <input type="hidden" name="title" value="<?= the_title() ?>">
             <input type="text" name="first_name" placeholder="<?= pll__('Name') ?>" required><br>
@@ -59,7 +59,7 @@
             <input type="submit" value="<?= pll__('Submit') ?>">
 
             <div class="hidden wpcf7-response-output"><?= pll__('FormSuccess') ?></div>
-        </form>  
+        </form>
     </div>
 </div>
 
@@ -101,6 +101,17 @@
         <path d="M1 1L7 7L13 1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
     </symbol>
 </svg>
+
+
+<?php
+    $copy = get_field('onoff_copy_page');
+
+    if (empty($copy[0])) {
+        ?>
+        <style>body {user-select: none !important;}</style>
+        <?php
+    }
+?>
 
 <?php wp_footer(); ?>
 </body>

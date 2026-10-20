@@ -1,0 +1,33 @@
+User-agent: *
+# Забороняємо індексацію службових сторінок, адмінки та технічних розділів
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /admin/
+Disallow: /administrator/
+Disallow: /login/
+Disallow: /cart/
+Disallow: /checkout/
+Disallow: /basket/
+Disallow: /wishlist/
+Disallow: /compare/
+Disallow: /search/
+Disallow: /account/
+Disallow: /profile/
+
+# Забороняємо фільтри та сортування (щоб уникнути дублів сторінок)
+Disallow: /*?*filter=
+Disallow: /*?*sort=
+Disallow: /*?*order=
+Disallow: /*?limit=
+Disallow: /*&filter=
+Disallow: /*&sort=
+
+# Доступно для сканування іншими роботами (наприклад, для ШІ чи аналітики, за бажанням можна налаштувати окремо)
+User-agent: Googlebot
+Allow: /
+
+User-agent: Yandex
+Allow: /
+
+# Посилання на карту сайту (обов'язково вкажіть ваш реальний домен)
+Sitemap: https://master5.kiev.ua/sitemap_index.xml

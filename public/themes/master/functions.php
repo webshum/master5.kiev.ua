@@ -17,6 +17,7 @@ add_action('after_setup_theme', function () {
 });
 
 // Polylang
+pll_register_string( 'home', 'Home', 'WordPress' );
 pll_register_string( 'search', 'Search', 'WordPress' );
 pll_register_string( 'slogan', 'Slogan', 'WordPress' );
 pll_register_string( 'comment', 'Comment', 'WordPress' );
@@ -29,6 +30,7 @@ pll_register_string( 'reply-cancel', 'Cancel Reply', 'WordPress' );
 pll_register_string( 'post-comment', 'Post Comment', 'WordPress' );
 pll_register_string( 'name', 'Name', 'WordPress' );
 pll_register_string( 'email', 'Email', 'WordPress' );
+pll_register_string( 'phone', 'Phone', 'WordPress' );
 pll_register_string( 'website', 'Website', 'WordPress' );
 pll_register_string( 'more', 'More', 'WordPress' );
 pll_register_string( 'fresh-posts', 'Fresh posts', 'WordPress' );
@@ -40,6 +42,9 @@ pll_register_string( 'form_success', 'FormSuccess', 'WordPress' );
 pll_register_string( 'captcha', 'Incorrect value', 'WordPress' );
 pll_register_string( 'captcha', 'Enter a number', 'WordPress' );
 pll_register_string( 'captcha', 'How many', 'WordPress' );
+pll_register_string( 'captcha', 'Enter a valid phone number', 'WordPress' );
+pll_register_string( 'captcha', 'What color is this?', 'WordPress' );
+pll_register_string( 'captcha', 'Enter the color name', 'WordPress' );
 
 // Open comments
 add_filter( 'comments_open', function($open, $post_id) {
@@ -246,17 +251,17 @@ function send_form() {
     if (!empty($title)) $body .= 'Заголовок: ' . $title . '<br>';
 
     $body .= '</body></html>';
-    
+
     $headers = [
         'From' => 'info@master5.kiev.ua',
         'Reply-To' => 'info@master5.kiev.ua',
         'Content-Type' => 'text/html; charset=UTF-8'
     ];
-    
+
     // $result = mail($to, $subject, $body, implode("\r\n", $headers));
-     
+
     mail( $to, $subject, $body, $headers );
-    
+
     echo 'Done!';
     wp_die();
 }
@@ -299,3 +304,31 @@ function send_comment_email($comment_id) {
 
 add_action('comment_post', 'send_comment_email', 11, 2);
 
+/*
+|--------------------------------------------------------------------------
+| BREADCRUMBS
+|--------------------------------------------------------------------------
+*/
+function custom_breadcrumbs() {
+    $separator = ' / ';
+    $home_title = function_exists('pll__') ? pll__('Home') : __('Головна', 'your-text-domain');
+
+    if (!is_front_page()) {
+        echo '<nav class="breadcrumbs py-4 border-b border-[#ccc] text-gray-500" aria-label="Breadcrumb">';
+        echo '<a class="text-[var(--c-akcent)] hover:underline" href="' . get_option('home') . '">' . $home_title . '</a>' . $separator;
+
+        if (is_category() || is_single()) {
+            the_category(' ' . $separator . ' ');
+            if (is_single()) {
+                echo ' ' . $separator . ' ';
+                the_title();
+            }
+        } elseif (is_page()) {
+            echo the_title();
+        } elseif (is_search()) {
+            echo 'Результати пошуку: "' . get_search_query() . '"';
+        }
+
+        echo '</nav>';
+    }
+}

@@ -5,20 +5,6 @@ if ( post_password_required() ) {
 ?>
 
 <div id="comments" class="comments-area">
-    <?php if ( have_comments() ) : ?>
-        <ol class="comment-list">
-            <?php
-            wp_list_comments( array(
-                'style'      => 'ol',
-                'short_ping' => true
-            ) );
-            ?>
-        </ol>
-
-        <?php the_comments_navigation(); ?>
-
-    <?php endif; ?>
-
     <?php
     if ( ! comments_open() && get_comments_number() ) :
         ?>
@@ -61,13 +47,42 @@ if ( post_password_required() ) {
 
     comment_form( $args );
     ?>
-    
+
     <div id="comment-form-captcha">
-        <label for="captcha"><?php echo pll__('How many') ?> 4 + 13?</label>
-        <input type="text" id="captcha-input" placeholder="<?php echo pll__('Enter a number') ?>">
-        <p class="error" style="display: none;"><?php echo pll__('Incorrect value') ?></p>
+        <p class="captcha-phone">
+            <label for="captcha-phone"><?php echo pll__('Phone') ?> <span class="required">*</span></label>
+            <input type="tel" id="captcha-phone" name="comment_phone" form="commentform"
+                   placeholder="+380 XX XXX XX XX" autocomplete="tel" inputmode="tel">
+        </p>
+        <p class="error error-phone" style="display: none;"><?php echo pll__('Enter a valid phone number') ?></p>
+
+        <p class="captcha-color">
+            <label for="captcha-color-input"><?php echo pll__('What color is this?') ?> <span class="required">*</span></label>
+            <span
+                id="captcha-color-swatch"
+                class="inline-block w-[35px] h-5 rounded align-middle mx-2.5"
+            ></span>
+            <input type="text" id="captcha-color-input" placeholder="<?php echo pll__('Enter the color name') ?>" autocomplete="off">
+        </p>
+        <p class="error error-color" style="display: none;"><?php echo pll__('Incorrect value') ?></p>
+
         <input type="submit" id="custom-submit" value="<?php echo pll__('Post Comment') ?>">
     </div>
+
+    <?php if ( have_comments() ) : ?>
+        <ol class="comment-list">
+            <?php
+            wp_list_comments( array(
+                'style'      => 'ol',
+                'short_ping' => true,
+                'reverse_top_level' => true,
+            ) );
+            ?>
+        </ol>
+
+        <?php the_comments_navigation(); ?>
+
+    <?php endif; ?>
 </div>
 
 <script>
@@ -75,19 +90,45 @@ if ( post_password_required() ) {
         const commentForm = document.querySelector('form.comment-form');
         const captchaBlock = document.getElementById('comment-form-captcha');
         const submitButton = document.getElementById('custom-submit');
-        const captchaInput = document.getElementById('captcha-input');
-        const errorMessage = captchaBlock.querySelector('.error');
+        const phoneInput = document.getElementById('captcha-phone');
+        const colorInput = document.getElementById('captcha-color-input');
+        const swatch = document.getElementById('captcha-color-swatch');
+        const phoneError = captchaBlock.querySelector('.error-phone');
+        const colorError = captchaBlock.querySelector('.error-color');
+
+        const colors = [
+            { hex: '#e53935', answers: ['червоний', 'красный', 'red'] },
+            { hex: '#43a047', answers: ['зелений', 'зеленый', 'green'] },
+            { hex: '#fdd835', answers: ['жовтий', 'желтый', 'yellow'] },
+            { hex: '#fb8c00', answers: ['помаранчевий', 'оранжевый', 'orange'] },
+            { hex: '#212121', answers: ['чорний', 'черный', 'black'] },
+            { hex: '#8e24aa', answers: ['фіолетовий', 'фиолетовый', 'purple', 'violet'] }
+        ];
+
+        const current = colors[Math.floor(Math.random() * colors.length)];
+        swatch.style.backgroundColor = current.hex;
+
+        function normalize(str) {
+            return str.trim().toLowerCase().replace(/ё/g, 'е');
+        }
+
+        function isPhoneValid(value) {
+            const digits = value.replace(/\D/g, '');
+            return /^[+\d\s()\-]+$/.test(value) && digits.length >= 10 && digits.length <= 15;
+        }
 
         submitButton.addEventListener('click', function (e) {
             e.preventDefault();
 
-            if (Number(captchaInput.value) === 17) {
-                errorMessage.style.display = 'none';
+            const phoneOk = isPhoneValid(phoneInput.value);
+            const colorOk = current.answers.includes(normalize(colorInput.value));
+
+            phoneError.style.display = phoneOk ? 'none' : 'block';
+            colorError.style.display = colorOk ? 'none' : 'block';
+
+            if (phoneOk && colorOk) {
                 commentForm.submit();
-            } else {
-                errorMessage.style.display = 'block';
             }
         });
     });
 </script>
-
