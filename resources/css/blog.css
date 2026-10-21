@@ -52,6 +52,33 @@
     }
 }
 
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+
+    a,
+    .current {
+        width: 30px;
+        height: 30px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 3px;
+        font-weight: bold;
+        color: #000;
+    }
+
+    a:not(.next):not(.prev),
+    .current {border: 1px solid #cccccc;}
+    .current {
+        background-color: #c4dac8;
+        color: #fff;
+        border-color: #c4dac8;
+    }
+}
+
 .sidebar {
     background: #efefef;
     padding: 20px;

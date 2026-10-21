@@ -5,13 +5,13 @@
         <?php if (function_exists('custom_breadcrumbs')) custom_breadcrumbs(); ?>
         <h1><?php the_title(); ?></h1>
         <?php the_content(); ?>
+    </div>
 
-        <?php
+    <?php
         if ( comments_open() || get_comments_number() ) {
             comments_template();
         }
-        ?>
-    </div>
+    ?>
 </main>
 
 <?php get_footer(); ?>

@@ -9,6 +9,7 @@
     margin: 25px 0 50px 0;
 
     .grid {
+        display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 30px;
         text-align: center;
@@ -38,6 +39,7 @@
     padding-bottom: 30px;
 
     .grid {
+        display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 30px;
     }

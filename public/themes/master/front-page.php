@@ -15,89 +15,16 @@ $content = get_field('content');
         <h1><?php the_title(); ?></h1>
 
         <?php if (!empty($home)) : ?>
-            <div class="home">
-                <?= $home ?>
-            </div>
+            <?= $home ?>
         <?php endif; ?>
+    </div>
 
-        <?php if (!isArrayEmpty($services)) : ?>
-            <div class="services">
-                <?php if (!empty($services['title'])) : ?>
-                    <h2 class="text-center"><?= $services['title']; ?></h2>
-                <?php endif; ?>
-
-                <div class="grid">
-                    <?php foreach ($services['service'] as $service) : ?>
-                    <div class="service">
-                        <?php if (!empty($service['title'])) : ?>
-                            <h3><?= $service['title']; ?></h3>
-                        <?php endif; ?>
-
-                        <?php if (!empty($service['image']['url'])) : ?>
-                            <div class="image">
-                                <img src="<?= $service['image']['url']; ?>" alt="<?= $service['image']['alt']; ?>">
-                            </div>
-                        <?php endif; ?>
-
-                        <?php if (!empty($service['text'])) : ?>
-                            <div class="desc"><?= $service['text']; ?></div>
-                        <?php endif; ?>
-
-                        <?php if (!empty($service['link'])) : ?>
-                            <?php $target = (!empty($service['link']['target'])) ? "target='_blank'" : '' ?>
-                            <a href="<?= $service['link']['url'] ?>" class="button" <?= $target ?>>
-                                <span><?= $service['link']['title'] ?></span>
-                            </a>
-                        <?php endif; ?>
-                    </div>
-                <?php endforeach; ?>
-                </div>
-            </div>
-        <?php endif; ?>
-
-        <?php if (!isArrayEmpty($reviews)) : ?>
-            <div class="reviews">
-                <?php if (!empty($reviews['title'])) : ?>
-                    <h2 class="text-center"><?= $reviews['title']; ?></h2>
-                <?php endif; ?>
-
-                <div class="grid">
-                    <?php foreach ($reviews['review'] as $review) : ?>
-                        <div class="review">
-                            <?php if (!empty($review['text'])) : ?>
-                                <div class="desc"><?= $review['text']; ?></div>
-                            <?php endif; ?>
-
-                            <div class="flex items-center justify-between">
-                                <?php if (!empty($review['title'])) : ?>
-                                    <h4><?= $review['title']; ?></h4>
-                                <?php endif; ?>
-
-                                <?php if (!empty($review['image']['url'])) : ?>
-                                    <div class="image">
-                                        <img src="<?= $review['image']['url']; ?>" alt="<?= $review['image']['alt']; ?>">
-                                    </div>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-        <?php endif; ?>
-
-        <?php if (!empty($content)) : ?>
-            <div class="content">
-                <?= $content ?>
-            </div>
-        <?php endif; ?>
-
-        <div class="mt-5">
+    <div class="mt-5">
         <?php
             if ( (comments_open() || get_comments_number()) && empty(get_field('onoff_comments')) ) {
                 comments_template();
             }
         ?>
-        </div>
     </div>
 </main>
 

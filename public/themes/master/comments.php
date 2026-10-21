@@ -4,7 +4,7 @@ if ( post_password_required() ) {
 }
 ?>
 
-<div id="comments" class="comments-area">
+<div id="comments" class="comments-area center">
     <?php
     if ( ! comments_open() && get_comments_number() ) :
         ?>
