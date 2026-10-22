@@ -15,7 +15,7 @@ get_header();
 
                 $args = [
                     'post_type' => 'post',
-                    'posts_per_page' => 10,
+                    'posts_per_page' => 8,
                     'paged' => $paged,
                     'lang' => pll_current_language()
                 ];

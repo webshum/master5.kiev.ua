@@ -1,10 +1,13 @@
 .custom-reply-title {display: none;}
 .comment-list {
+    margin: 30px 0;
+
     & > .comment {
         padding: 20px;
         border: 1px solid var(--c-akcent);
         border-radius: 20px;
     }
+    & > .comment + .comment {margin-top: 15px;}
 
     .comment:before {display: none;}
 
