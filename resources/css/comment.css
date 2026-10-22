@@ -84,12 +84,12 @@
         label {margin-top: 4px;}
     }
 
+    .cf-turnstile {order: 2;}
+
     .form-submit {
         width: 100%;
         order: 3;
     }
-
-    input[type="submit"] {display: none;}
 }
 
 #comment-form-captcha {

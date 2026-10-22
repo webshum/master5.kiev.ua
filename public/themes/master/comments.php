@@ -42,18 +42,20 @@ if ( post_password_required() ) {
         'title_reply_to' => pll__('Leave a Reply to'),
         'cancel_reply_link' => pll__('Cancel Reply'),
         'label_submit' => pll__('Post Comment'),
-        'submit_button' => '', // Приховуємо стандартну кнопку
+        // 'submit_button' => '', // Приховуємо стандартну кнопку
     ];
 
     comment_form( $args );
     ?>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <div class="cf-turnstile" data-sitekey="ВАШ_SITE_KEY"></div>
 
-    <div id="comment-form-captcha">
+    <!--<div id="comment-form-captcha">
         <label for="captcha"><?php echo pll__('How many') ?> 2 * 2?</label>
         <input type="text" id="captcha-input" placeholder="<?php echo pll__('Enter a number') ?>">
         <p class="error" style="display: none;"><?php echo pll__('Incorrect value') ?></p>
         <input type="submit" id="custom-submit" value="<?php echo pll__('Post Comment') ?>">
-    </div>
+        </div>-->
 
     <?php if ( have_comments() ) : ?>
         <ol class="comment-list">
@@ -71,7 +73,7 @@ if ( post_password_required() ) {
     <?php endif; ?>
 </div>
 
-<script>
+<!--<script>
     document.addEventListener("DOMContentLoaded", function () {
         const commentForm = document.querySelector('form.comment-form');
         const captchaBlock = document.getElementById('comment-form-captcha');
@@ -90,4 +92,4 @@ if ( post_password_required() ) {
             }
         });
     });
-</script>
+</script>-->

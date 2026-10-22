@@ -332,3 +332,64 @@ function custom_breadcrumbs() {
         echo '</nav>';
     }
 }
+
+/*
+|--------------------------------------------------------------------------
+| CAPTCHA
+|--------------------------------------------------------------------------
+*/
+// Include scripts there form comment
+add_action('wp_enqueue_scripts', function () {
+    if (is_singular() && comments_open() && !is_user_logged_in()) {
+        wp_enqueue_script(
+            'cf-turnstile',
+            'https://challenges.cloudflare.com/turnstile/v0/api.js',
+            [],
+            null,
+            ['strategy' => 'async', 'in_footer' => true]
+        );
+    }
+});
+
+// Print widget before submit
+add_filter('comment_form_submit_field', function ($submit_field) {
+    if (is_user_logged_in()) {
+        return $submit_field;
+    }
+
+    $widget = '<div class="cf-turnstile" data-sitekey="' . esc_attr(env('TURNSTILE_SITE_KEY')) . '"></div>';
+
+    return $widget . $submit_field;
+});
+
+// Checking on server
+add_action('pre_comment_on_post', function () {
+    if (is_user_logged_in()) {
+        return;
+    }
+
+    $token = $_POST['cf-turnstile-response'] ?? '';
+
+    if ($token === '') {
+        wp_die(pll__('Incorrect value'), '', ['response' => 403, 'back_link' => true]);
+    }
+
+    $response = wp_remote_post('https://challenges.cloudflare.com/turnstile/v0/siteverify', [
+        'timeout' => 10,
+        'body'    => [
+            'secret'   => env('TURNSTILE_SECRET_KEY'),
+            'response' => $token,
+            'remoteip' => $_SERVER['REMOTE_ADDR'] ?? '',
+        ],
+    ]);
+
+    if (is_wp_error($response)) {
+        wp_die('Captcha service unavailable, try again later.', '', ['response' => 503, 'back_link' => true]);
+    }
+
+    $body = json_decode(wp_remote_retrieve_body($response), true);
+
+    if (empty($body['success'])) {
+        wp_die(pll__('Incorrect value'), '', ['response' => 403, 'back_link' => true]);
+    }
+});
