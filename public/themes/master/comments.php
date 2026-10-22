@@ -82,7 +82,7 @@ if ( post_password_required() ) {
         submitButton.addEventListener('click', function (e) {
             e.preventDefault();
 
-            if (Number(captchaInput.value) === 4) {
+            if (Number(captchaInput.value) === 3) {
                 errorMessage.style.display = 'none';
                 commentForm.submit();
             } else {
