@@ -11,6 +11,15 @@
     <link rel="apple-touch-icon" href="https://master5.kiev.ua/uploads/2024/08/cropped-favicon-180x180.png" />
     <meta name="msapplication-TileImage" content="https://master5.kiev.ua/uploads/2024/08/cropped-favicon-270x270.png" />
 
+    <?php
+        $path = dirname(dirname(dirname(get_template_directory())));
+        $style = file_get_contents($path . "/resources/css/critical.min.css");
+        $style = html_entity_decode($style);
+        echo "<style>{$style}</style>";
+    ?>
+
+    <?php wp_head(); ?>
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-6SHBC1BCTG"></script>
     <script>
@@ -20,8 +29,6 @@
 
         gtag('config', 'G-6SHBC1BCTG');
     </script>
-
-    <?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
